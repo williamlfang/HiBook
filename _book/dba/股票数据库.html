@@ -452,7 +452,7 @@
 </li>
 </ul>
 <h1 id="chinastocksbar"><code>china_stocks_bar</code></h1>
-<h2 id="daily"><code>daily</code></h2>
+<h2 id="daily&#xFF1A;&#x65E5;&#x884C;&#x60C5;&#x6570;&#x636E;"><code>daily</code>&#xFF1A;&#x65E5;&#x884C;&#x60C5;&#x6570;&#x636E;</h2>
 <pre class="language-"><code class="lang-mysql">################################################################################
 ## china_stocks_bar.daily
 ################################################################################
@@ -528,7 +528,7 @@ ALTER TABLE china_stocks_bar.daily
     );
 ## -------------------------------------------------------------------------- ##
 </code></pre>
-<h2 id="minute"><code>minute</code></h2>
+<h2 id="minute&#xFF1A;&#x5206;&#x949F;&#x884C;&#x60C5;&#x6570;&#x636E;"><code>minute</code>&#xFF1A;&#x5206;&#x949F;&#x884C;&#x60C5;&#x6570;&#x636E;</h2>
 <pre class="language-"><code class="lang-mysql">
 
 ################################################################################
@@ -560,7 +560,7 @@ ON china_stocks_bar.minute
 (TradingDay, StockID);
 ## -------------------------------------------------------------------------- ##
 </code></pre>
-<h2 id="valuation"><code>valuation</code></h2>
+<h2 id="valuation&#xFF1A;&#x4F30;&#x503C;&#x6570;&#x636E;"><code>valuation</code>&#xFF1A;&#x4F30;&#x503C;&#x6570;&#x636E;</h2>
 <pre class="language-"><code class="lang-mysql">
 ################################################################################
 ## china_stocks_bar.valuation
@@ -589,7 +589,6 @@ CREATE INDEX index_valuation
 ON china_stocks_bar.valuation
 (TradingDay, StockID);  
 ## -------------------------------------------------------------------------- ## 
-
 
 ##----------- PARTITIONS ---------------------------------------------------- ##
 ALTER TABLE china_stocks_bar.valuation
@@ -625,8 +624,146 @@ ALTER TABLE china_stocks_bar.valuation
     );
 ## -------------------------------------------------------------------------- ##
 </code></pre>
+<h1 id="chinastocksinfo"><code>china_stocks_info</code></h1>
+<h2 id="onlistingdelising&#xFF1A;&#x4E0A;&#x5E02;&#x9000;&#x5E02;&#x5217;&#x8868;"><code>onlisting/delising</code>&#xFF1A;&#x4E0A;&#x5E02;/&#x9000;&#x5E02;&#x5217;&#x8868;</h2>
+<pre class="language-"><code class="lang-mysql">################################################################################
+## china_stocks_info.onlisting
+## &#x6B63;&#x5728;&#x4EA4;&#x6613;&#x7684;&#x80A1;&#x7968;
+################################################################################
+CREATE TABLE china_stocks_info.onlisting(
+    StockID       CHAR(30)   NOT NULL,      ## &#x80A1;&#x7968;&#x4EE3;&#x7801;
+    StockName     CHAR(30),                 ## &#x80A1;&#x7968;&#x540D;&#x79F0;
+    ## -------------------------------------------------------------------------
+    StockID_B     CHAR(30),                 ## &#x80A1;&#x7968;&#x4EE3;&#x7801;B
+    StockName_B   CHAR(30),                 ## &#x80A1;&#x7968;&#x540D;&#x79F0;B
+    ## -------------------------------------------------------------------------
+    ExchID        CHAR(30)   NOT NULL,      ## &#x4EA4;&#x6613;&#x6240;&#x4EE3;&#x7801;, sh, sz    
+    ## -------------------------------------------------------------------------
+    ListingDate   DATE,                     ## &#x4E0A;&#x5E02;&#x65F6;&#x95F4;
+    ## -------------------------------------------------------------------------
+    PRIMARY KEY (StockID, ExchID)
+);
+
+################################################################################
+## china_stocks_info.delisting
+## &#x5DF2;&#x7ECF;&#x9000;&#x5E02;&#x7684;&#x80A1;&#x7968;
+################################################################################
+CREATE TABLE china_stocks_info.delisting(
+    StockID       CHAR(30)   NOT NULL,      ## &#x80A1;&#x7968;&#x4EE3;&#x7801;
+    StockName     CHAR(30),                 ## &#x80A1;&#x7968;&#x540D;&#x79F0;
+    ## -------------------------------------------------------------------------
+    ExchID        CHAR(30)   NOT NULL,      ## &#x4EA4;&#x6613;&#x6240;&#x4EE3;&#x7801;, sh, sz    
+    ## -------------------------------------------------------------------------
+    ListingDate     DATE,                   ## &#x4E0A;&#x5E02;&#x65F6;&#x95F4;
+    TerminatedDate  DATE,                   ## &#x9000;&#x5E02;&#x65F6;&#x95F4;
+    ## -------------------------------------------------------------------------
+  PRIMARY KEY (StockID, ExchID)
+);
+</code></pre>
+<h2 id="suspending&#xFF1A;&#x505C;&#x724C;&#x4FE1;&#x606F;"><code>suspending</code>&#xFF1A;&#x505C;&#x724C;&#x4FE1;&#x606F;</h2>
+<pre class="language-"><code class="lang-mysql">################################################################################
+## china_stocks_info.suspending
+## &#x5DF2;&#x7ECF;&#x9000;&#x5E02;&#x7684;&#x80A1;&#x7968;
+################################################################################
+CREATE TABLE china_stocks_info.suspending(
+    TradingDay    DATE       NOT NULL,      ## &#x4EA4;&#x6613;&#x65E5;&#x671F;
+    StockID       CHAR(30)   NOT NULL,      ## &#x80A1;&#x7968;&#x4EE3;&#x7801;
+    StockName     CHAR(30),                 ## &#x80A1;&#x7968;&#x540D;&#x79F0;
+    ## -------------------------------------------------------------------------
+    ExchID        CHAR(30)   NOT NULL,      ## &#x4EA4;&#x6613;&#x6240;&#x4EE3;&#x7801;, sh, sz    
+    ## -------------------------------------------------------------------------
+    SuspendStart  DATE,                     ## &#x505C;&#x724C;&#x5F00;&#x59CB;
+    SuspendEnd    DATE,                     ## &#x505C;&#x724C;&#x7ED3;&#x675F;&#xFF08;&#x5230;&#x5F53;&#x65E5;&#x6536;&#x76D8;&#xFF09;
+    SuspendReason text,                     ## &#x505C;&#x724C;&#x539F;&#x56E0;
+    ## -------------------------------------------------------------------------
+  PRIMARY KEY (TradingDay, StockID, ExchID)
+);
+</code></pre>
+<h2 id="limitfromjrj&#xFF1A;&#x5386;&#x53F2;&#x6DA8;&#x8DCC;&#x505C;"><code>limit_from_jrj</code>&#xFF1A;&#x5386;&#x53F2;&#x6DA8;&#x8DCC;&#x505C;</h2>
+<pre class="language-"><code class="lang-mysql">################################################################################
+## china_stocks_info.limit_from_jrj
+## &#x5DF2;&#x7ECF;&#x9000;&#x5E02;&#x7684;&#x80A1;&#x7968;
+################################################################################
+CREATE TABLE china_stocks_info.limit_from_jrj(
+    TradingDay    DATE       NOT NULL,      ## &#x4EA4;&#x6613;&#x65E5;&#x671F;
+    StockID       CHAR(30)   NOT NULL,      ## &#x80A1;&#x7968;&#x4EE3;&#x7801;
+    ## -------------------------------------------------------------------------
+    ExchID        CHAR(30)   NOT NULL,      ## &#x4EA4;&#x6613;&#x6240;&#x4EE3;&#x7801;, sh, sz    
+    ## -------------------------------------------------------------------------
+    Close         DECIMAL(10,3),            ## &#x5F00;&#x76D8;&#x4EF7;
+    Chgpct        DECIMAL(10,5),            ## &#x6DA8;&#x8DCC;
+    LimitType     CHAR(30)   NOT NULL,      ## &#x6DA8;&#x8DCC;&#x505C;
+                                            ## upper: &#x6DA8;&#x505C;
+                                            ## lower: &#x8DCC;&#x505C;
+    ## -------------------------------------------------------------------------
+  PRIMARY KEY (TradingDay, StockID, ExchID)
+);
+</code></pre>
+<h2 id="industryclass&#xFF1A;&#x884C;&#x4E1A;&#x5206;&#x7C7B;"><code>industry_class</code>&#xFF1A;&#x884C;&#x4E1A;&#x5206;&#x7C7B;</h2>
+<pre class="language-"><code class="lang-mysql">################################################################################
+## china_stocks_info.industry_class_from_sw
+################################################################################
+CREATE TABLE  china_stocks_info.industry_class_from_sw(
+    TradingDay      DATE             NOT NULL,          ## &#x4EA4;&#x6613;&#x65E5;&#x671F;
+    stockID         CHAR(10)         NOT NULL,          ## &#x80A1;&#x7968;&#x4EE3;&#x7801;
+    stockName       VARCHAR(30)      NOT NULL,          ## &#x80A1;&#x7968;&#x540D;&#x79F0;
+    #------------------------------------------------------
+    industryLevel   CHAR(1),                            ## &#x884C;&#x4E1A;&#x5206;&#x7EA7;
+    industryID      VARCHAR(30),                        ## &#x884C;&#x4E1A;&#x5206;&#x7C7B;
+    industryName    VARCHAR(50),                        ## &#x884C;&#x4E1A;&#x5206;&#x7C7B;
+    #------------------------------------------------------
+    startDate       DATE,                               ## &#x5165;&#x9009;&#x65F6;&#x95F4;
+    endDate         DATE,                               ## &#x5254;&#x9664;&#x65F6;&#x95F4;
+    #-----------------------------------------------------
+    PRIMARY KEY (TradingDay, stockID, industryLevel),   ## &#x4E3B;&#x952E;&#x552F;&#x4E00;&#xFF0C;&#x91CD;&#x590D;&#x4E0D;&#x53EF;&#x8F93;&#x5165;
+    KEY `TradingDay` (`TradingDay`),
+    KEY `StockID` (`StockID`)
+    );
+
+##----------- INDEX --------------------------------------------------------- ##
+CREATE INDEX index_industry_class_from_sw
+ON china_stocks_info.industry_class_from_sw
+(TradingDay, stockID, industryLevel);
+## -------------------------------------------------------------------------- ##
+</code></pre>
+<h2 id="allotment&#xFF1A;&#x5206;&#x7EA2;&#x914D;&#x80A1;"><code>allotment</code>&#xFF1A;&#x5206;&#x7EA2;&#x914D;&#x80A1;</h2>
+<pre class="language-"><code class="lang-mysql">################################################################################
+## china_stocks_info.allotment_from_em
+################################################################################
+CREATE TABLE  china_stocks_info.allotment_from_em(
+    &#x80A1;&#x7968;&#x4EE3;&#x7801;    CHAR(10),
+    &#x80A1;&#x7968;&#x7B80;&#x79F0;    VARCHAR(30),
+    &#x914D;&#x80A1;&#x4EE3;&#x7801;    CHAR(10),
+    &#x914D;&#x80A1;&#x7B80;&#x79F0;    VARCHAR(30),
+
+    &#x6BCF;10&#x80A1;&#x914D;&#x80A1;&#x6BD4;&#x4F8B;    DECIMAL(5,3),
+    &#x914D;&#x80A1;&#x4EF7;&#x683C;          DECIMAL(10,3),      
+    &#x914D;&#x80A1;&#x524D;&#x603B;&#x80A1;&#x672C;      DECIMAL(30,3),
+    &#x914D;&#x80A1;&#x80A1;&#x672C;         DECIMAL(30,3),
+    &#x914D;&#x80A1;&#x540E;&#x603B;&#x80A1;&#x672C;      DECIMAL(30,3),
+
+    &#x80A1;&#x6743;&#x767B;&#x8BB0;&#x65E5;        DATE,
+    &#x7F34;&#x6B3E;&#x8D77;&#x59CB;&#x65E5;&#x671F;       DATE,
+    &#x7F34;&#x6B3E;&#x622A;&#x81F3;&#x65E5;&#x671F;       DATE,
+    &#x4E0A;&#x5E02;&#x65E5;&#x671F;          DATE,
+    &#x9664;&#x6743;&#x57FA;&#x51C6;&#x65E5;         DATE,
+
+    &#x5B9E;&#x9645;&#x52DF;&#x8D44;&#x603B;&#x989D;      DECIMAL(30,3),
+    &#x5B9E;&#x9645;&#x52DF;&#x8D44;&#x51C0;&#x989D;      DECIMAL(30,3),
+    #-----------------------------------------------------
+    PRIMARY KEY (&#x80A1;&#x7968;&#x4EE3;&#x7801;, &#x80A1;&#x6743;&#x767B;&#x8BB0;&#x65E5;, &#x4E0A;&#x5E02;&#x65E5;&#x671F;),   ## &#x4E3B;&#x952E;&#x552F;&#x4E00;&#xFF0C;&#x91CD;&#x590D;&#x4E0D;&#x53EF;&#x8F93;&#x5165;
+    KEY `&#x80A1;&#x7968;&#x4EE3;&#x7801;` (`&#x80A1;&#x7968;&#x4EE3;&#x7801;`),
+    KEY `&#x80A1;&#x7968;&#x7B80;&#x79F0;` (`&#x80A1;&#x7968;&#x7B80;&#x79F0;`)
+    );
+
+##----------- INDEX --------------------------------------------------------- ##
+CREATE INDEX index_allotment_from_em
+ON china_stocks_info.allotment_from_em
+(&#x80A1;&#x7968;&#x4EE3;&#x7801;, &#x80A1;&#x6743;&#x767B;&#x8BB0;&#x65E5;, &#x4E0A;&#x5E02;&#x65E5;&#x671F;);
+## -------------------------------------------------------------------------- ##
+</code></pre>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2019-11-01 14:13:20
+2019-11-01 14:23:41
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -671,7 +808,7 @@ ALTER TABLE china_stocks_bar.valuation
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"股票数据库","level":"2.2.6","depth":2,"next":{"title":"vnpy","level":"3.1","depth":1,"path":"trading/vnpy.md","ref":"trading/vnpy.md","articles":[]},"previous":{"title":"期货数据库","level":"2.2.5","depth":2,"path":"dba/期货数据库.md","ref":"dba/期货数据库.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","advanced-emoji","alerts"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"alerts":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"dba/股票数据库.md","mtime":"2019-11-01T06:13:20.193Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-01T06:13:24.816Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"股票数据库","level":"2.2.6","depth":2,"next":{"title":"vnpy","level":"3.1","depth":1,"path":"trading/vnpy.md","ref":"trading/vnpy.md","articles":[]},"previous":{"title":"期货数据库","level":"2.2.5","depth":2,"path":"dba/期货数据库.md","ref":"dba/期货数据库.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","advanced-emoji","alerts"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"alerts":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"dba/股票数据库.md","mtime":"2019-11-01T06:23:41.731Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-01T06:23:49.088Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
