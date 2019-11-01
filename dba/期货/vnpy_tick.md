@@ -12,9 +12,11 @@
 > **[warning] 提醒**
 >
 > 一般我会把这个数据处理写成 `crontab` 任务，如果后面有出现错误，直接执行这个脚本即可
-
-> > `20 15 * * 1-5 bash /home/fl/myData/shell/ProcessData_From188.sh`
 > 
+
+```bash
+20 15 * * 1-5 bash /home/fl/myData/shell/ProcessData_From188.sh
+``` 
 
 # TickData 数据
 
