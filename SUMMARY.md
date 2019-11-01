@@ -9,6 +9,7 @@
     * [升级gcc](os/centos/gcc.md)
     * [命令行设置分辨率](os/centos/CentOS7命令行设置分辨率.md)
     * [命令行启动 TeamViewer](os/命令行启动 TeamViewer.md)
+    * [邮件系统](os/hicloud_exmail.md)
 * [MySQL 数据库]
     * [修改数据存储目录](dba/mysql/datapath.md)
     * [建立数据库命令](dba/mysql/database.md)
@@ -18,6 +19,7 @@
     * [金融交易日历](dba/calendar.md)
     * [期货数据库](dba/期货数据库.md)
     * [股票数据库](dba/股票数据库.md)
+        * [股票复权因子](dba/股票复权因子.md)
 
 ## 交易系统开发
 * [vnpy](trading/vnpy.md)
