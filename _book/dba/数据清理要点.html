@@ -1,0 +1,637 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>数据清理要点 · HiBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="方莲">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-dracula.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="期货数据库.md" />
+    
+    
+    <link rel="prev" href="mysql/operation.md" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://williamlfang.github.io/" target="_blank" class="custom-link">William's Blog</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    关于
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">服务器运维</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" >
+            
+                <span>
+            
+                    
+                    [CentOS7 操作系统]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../os/centos/centos7.html">
+            
+                <a href="../os/centos/centos7.html">
+            
+                    
+                    安装与配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../os/centos/LLVM 扩展逻辑磁盘.html">
+            
+                <a href="../os/centos/LLVM 扩展逻辑磁盘.html">
+            
+                    
+                    LLVM 扩展逻辑磁盘
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="../os/frp.html">
+            
+                <a href="../os/frp.html">
+            
+                    
+                    内网穿透
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" data-path="../os/centos/gcc.html">
+            
+                <a href="../os/centos/gcc.html">
+            
+                    
+                    升级gcc
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.5" data-path="../os/centos/CentOS7命令行设置分辨率.html">
+            
+                <a href="../os/centos/CentOS7命令行设置分辨率.html">
+            
+                    
+                    命令行设置分辨率
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6" data-path="../os/命令行启动 TeamViewer.html">
+            
+                <a href="../os/命令行启动 TeamViewer.html">
+            
+                    
+                    命令行启动 TeamViewer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" >
+            
+                <span>
+            
+                    
+                    [MySQL 数据库]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="mysql/datapath.html">
+            
+                <a href="mysql/datapath.html">
+            
+                    
+                    修改数据存储目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="mysql/database.html">
+            
+                <a href="mysql/database.html">
+            
+                    
+                    建立数据库命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.3" data-path="mysql/operation.md">
+            
+                <span>
+            
+                    
+                    数据库运维操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.2.4" data-path="数据清理要点.html">
+            
+                <a href="数据清理要点.html">
+            
+                    
+                    数据清理要点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.5" data-path="期货数据库.md">
+            
+                <span>
+            
+                    
+                    期货数据库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.6" data-path="股票数据库.md">
+            
+                <span>
+            
+                    
+                    股票数据库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">交易系统开发</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../trading/vnpy.html">
+            
+                <a href="../trading/vnpy.html">
+            
+                    
+                    vnpy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../trading/ctp.html">
+            
+                <a href="../trading/ctp.html">
+            
+                    
+                    期货
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../trading/xtp.html">
+            
+                <a href="../trading/xtp.html">
+            
+                    
+                    股票
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >数据清理要点</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <blockquote>
+<p><strong>[info] ChinaFutures</strong></p>
+<p>&#x9488;&#x5BF9;&#x4E2D;&#x56FD;&#x671F;&#x8D27;&#x6570;&#x636E;&#xFF0C;&#x4ECB;&#x7ECD;&#x5982;&#x4F55;&#x5904;&#x7406; <code>Tick Data</code>&#xFF08;&#x5206;&#x7B14;&#x6570;&#x636E;&#xFF09;&#xFF0C;&#x6D89;&#x53CA;&#x9519;&#x8BEF;&#x68C0;&#x67E5;&#x3001;&#x5197;&#x4F59;&#x6392;&#x9664;&#x3001;&#x6570;&#x636E;&#x6E05;&#x7406;&#x3001;&#x6570;&#x636E;&#x5E93;&#x7BA1;&#x7406;&#x7B49;&#x6280;&#x5DE7;&#x3002;</p>
+</blockquote>
+<p>&#x4ECE;&#x4EA4;&#x6613;&#x6240;&#x83B7;&#x53D6;&#x7684;&#x4E2D;&#x56FD;&#x671F;&#x8D27;&#x6570;&#x636E;&#xFF0C;&#x5F80;&#x5F80;&#x5B58;&#x5728;&#x6570;&#x636E;&#x4E0D;&#x5E72;&#x51C0;&#x3001;&#x5197;&#x4F59;&#x91CD;&#x590D;&#x3001;&#x5B57;&#x6BB5;&#x9519;&#x8BEF;&#x3001;&#x975E;&#x4EA4;&#x6613;&#x65F6;&#x95F4;&#x63A8;&#x9001;&#x7B49;&#x8BF8;&#x591A;&#x95EE;&#x9898;&#x3002;&#x4ECE; <code>Tick Data</code> &#x8BA1;&#x7B97;&#x6C47;&#x603B;&#x5F97;&#x5230; <code>Bar Data</code>&#xFF08;<code>daily</code> + <code>minute</code>&#xFF09;&#xFF0C;&#x524D;&#x63D0;&#x662F;&#x8981;&#x4FDD;&#x8BC1;&#x6211;&#x4EEC;&#x5F97;&#x5230;&#x7684;&#x6570;&#x636E;&#x662F;&#x771F;&#x5B9E;&#x3001;&#x51C6;&#x786E;&#x3001;&#x53EF;&#x9760;&#x7684;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5728;&#x6570;&#x636E;&#x5165;&#x5E93;&#x524D;&#x7684;&#x6570;&#x636E;&#x6E05;&#x7406;&#x6B65;&#x9AA4;&#x81F3;&#x5173;&#x91CD;&#x8981;&#x3002;&#x8FD9;&#x5C31;&#x597D;&#x6BD4;&#x662F;&#x533B;&#x751F;&#x5728;&#x8FDB;&#x5165;&#x624B;&#x672F;&#x5BA4;&#x524D;&#x9700;&#x8981;&#xFF08;&#x5FC5;&#x8981;&#xFF09;&#x5148;&#x8FDB;&#x884C;&#x5168;&#x9762;&#x7684;&#x6D88;&#x6BD2;&#x6E05;&#x7406;&#xFF0C;&#x624D;&#x80FD;&#x62FF;&#x8D77;&#x5200;&#x5B50;&#x3002;</p>
+<!--more-->
+<p>&#x76EE;&#x524D;&#x53EF;&#x7528;&#x7684;&#x6570;&#x636E;&#x4E3B;&#x8981;&#x5305;&#x62EC;&#x4E24;&#x90E8;&#x5206;&#xFF1A;</p>
+<ul>
+<li><strong>&#x5386;&#x53F2;&#x6570;&#x636E;</strong>&#xFF1A;&#x8FD9;&#x90E8;&#x5206;&#x6570;&#x636E;&#x4E3B;&#x8981;&#x7531; <code>FromDC</code> &#x63D0;&#x4F9B;&#xFF0C;&#x8D77;&#x6B62;&#x65F6;&#x95F4;&#x4E3A; <code>2010&#x3002;04.16 ~ 2019.11.01</code>&#x3002;&#x5176;&#x4E2D;&#xFF0C;<code>2010</code> &#x5E74;&#x4EFD;&#x7684;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x6BD4;&#x8F83;&#x7279;&#x522B;&#x3002;</li>
+<li><strong>&#x5B9E;&#x65F6;&#x6570;&#x636E;</strong>&#xFF1A;&#x76EE;&#x524D;&#xFF0C;&#x6211;&#x4EEC;&#x5728;<strong>&#x4E0A;&#x671F;&#x6240;</strong>&#x63D0;&#x4F9B;&#x7684; <code>CTP</code> &#x4EA4;&#x6613;&#x63A5;&#x53E3;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x5F00;&#x53D1;&#x4E86;&#x4E00;&#x5957;&#x7528;&#x4E8E;&#x63A5;&#x6536;&#x4EA4;&#x6613;&#x5B9E;&#x65F6;&#x6570;&#x636E;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x5185;&#x5D4C;&#x5230;&#x4EA4;&#x6613;&#x7CFB;&#x7EDF;&#xFF0C;&#x80FD;&#x591F;&#x4FDD;&#x8BC1;&#x5B9E;&#x65F6;&#x83B7;&#x53D6;&#x4EA4;&#x6613;&#x7684;&#x5206;&#x7B14;&#x6570;&#x636E;&#x3002;</li>
+</ul>
+<p>&#x4EE5;&#x4E0B;&#x662F;&#x6211;&#x5728;&#x7BA1;&#x7406;&#x516C;&#x53F8;&#x7684;&#x671F;&#x8D27;&#x6570;&#x636E;&#x5E93;&#x65F6;&#xFF0C;&#x603B;&#x7ED3;&#x51FA;&#x6765;&#x7684;&#x90E8;&#x5206;&#x6570;&#x636E;&#x6E05;&#x7406;&#x7ECF;&#x9A8C;&#x3002;&#x4E4B;&#x6240;&#x4EE5;&#x7528;&#x767D;&#x7EB8;(website)&#x9ED1;&#x5B57;(blog)&#xFF0C;&#x4E00;&#x65B9;&#x9762;&#x65B9;&#x4FBF;&#x65E5;&#x540E;&#x56DE;&#x987E;&#xFF0C;&#x53E6;&#x4E00;&#x65B9;&#x9762;&#x4E5F;&#x5E0C;&#x671B;&#x5BF9;&#x540E;&#x6765;&#x8005;&#x6709;&#x4E00;&#x5B9A;&#x7684;&#x542F;&#x793A;&#x3002;</p>
+<hr>
+<h1 id="&#x6570;&#x636E;&#x9519;&#x8BEF;">&#x6570;&#x636E;&#x9519;&#x8BEF;</h1>
+<h2 id="&#x9519;&#x8BEF;&#x6765;&#x6E90;">&#x9519;&#x8BEF;&#x6765;&#x6E90;</h2>
+<p>&#x4ECE;&#x6570;&#x636E;&#x6765;&#x6E90;&#x4E0A;&#x770B;&#xFF0C;&#x9020;&#x6210;&#x6570;&#x636E;&#x9519;&#x8BEF;&#x7684;&#x539F;&#x56E0;&#xFF0C;&#x65E0;&#x975E;&#x6709;&#x4E24;&#x4E2A;</p>
+<ul>
+<li>&#x4EA4;&#x6613;&#x6240;&#x63A8;&#x9001;&#x6570;&#x636E;&#x9519;&#x8BEF;&#xFF1A;&#x6709;&#x53EF;&#x80FD;&#x662F;&#x4EA4;&#x6613;&#x6240;&#x670D;&#x52A1;&#x5668;&#x4E0D;&#x7A33;&#x5B9A;&#x3001;&#x7F51;&#x7EDC;&#x4F20;&#x8F93;&#x4E2D;&#x65AD;&#x3001;&#x6570;&#x636E;&#x611F;&#x67D3;&#x7B49;</li>
+<li>&#x672C;&#x5730;&#x63A5;&#x6536;&#x6570;&#x636E;&#x9519;&#x8BEF;&#xFF1A;&#x6570;&#x636E;&#x7F16;&#x7801;&#x4E0D;&#x4E00;&#x81F4;&#x3001;&#x6570;&#x636E;&#x5199;&#x5165;&#x6587;&#x4EF6;&#x4E0D;&#x6B63;&#x786E;&#x3001;&#x5B57;&#x6BB5;&#x4E0D;&#x5339;&#x914D;&#x7B49;</li>
+</ul>
+<h2 id="&#x975E;&#x4EA4;&#x6613;&#x65F6;&#x6BB5;">&#x975E;&#x4EA4;&#x6613;&#x65F6;&#x6BB5;</h2>
+<p>&#x6240;&#x8C13;&#x7684;&#x975E;&#x4EA4;&#x6613;&#x65F6;&#x6BB5;&#xFF0C;&#x65E2;&#x5305;&#x62EC;&#x975E;&#x4EA4;&#x6613;&#x65E5;&#x671F;&#xFF0C;&#x4E5F;&#x5305;&#x62EC;&#x975E;&#x4EA4;&#x6613;&#x65F6;&#x95F4;&#x3002;&#x5373;&#x4ECE;&#x4EA4;&#x6613;&#x6240;&#x63A8;&#x9001;&#x7684;&#x6570;&#x636E;&#x975E;&#x5F53;&#x65F6;&#x4EA4;&#x6613;&#x65E5;&#x671F;&#x6570;&#x636E;&#xFF0C;&#x6709;&#x53EF;&#x80FD;&#x662F;&#x670D;&#x52A1;&#x5668;&#x63A8;&#x9001;&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#xFF0C;&#x6216;&#x8005;&#x7F51;&#x7EDC;&#x4E2D;&#x65AD;&#x9020;&#x6210;&#x6570;&#x636E;&#x62E5;&#x5835;&#x3002;</p>
+<blockquote>
+<ul>
+<li>&#x5728;&#x672C;&#x5730;&#x63A5;&#x6536;&#x6570;&#x636E;&#x7684;&#x7A0B;&#x5E8F;&#x91CC;&#x9762;&#xFF0C;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x5B57;&#x6BB5;&#x4E3A; <code>TimeStamp</code>&#xFF0C;&#x5373;&#x5BF9;&#x6BCF;&#x4E00;&#x7B14;&#x63A5;&#x6536;&#x5F97;&#x5230;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x6807;&#x8BB0;&#x65F6;&#x95F4;&#x6233;&#x3002;&#x540E;&#x671F;&#x7684;&#x5904;&#x7406;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x6233;&#x4E0E;&#x4EA4;&#x6613;&#x6240;&#x63A8;&#x9001;&#x7684;&#x6570;&#x636E;&#x65E5;&#x671F;&#x6709;&#x5DEE;&#x5F02;&#xFF0C;&#x5219;&#x8FDB;&#x884C;&#x6392;&#x9664;&#x3002;&#x4ECE;&#x4EA4;&#x6613;&#x7AEF;&#x7684;&#x53EF;&#x9760;&#x6027;&#x6765;&#x770B;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x5DEE;&#x4E0D;&#x5E94;&#x8BE5;&#x8D85;&#x8FC7; <code>1&#x5206;&#x949F;</code>&#xFF0C;&#x5426;&#x5219;&#x6570;&#x636E;&#x5931;&#x6548;&#x3002;</li>
+<li>&#x5BF9;&#x4E8E; <code>UpdaTime</code>&#xFF0C;&#x9700;&#x8981;&#x9650;&#x5B9A;&#x5728;&#x4EA4;&#x6613;&#x65F6;&#x95F4;&#x5185;&#xFF0C;&#x5373;&#x65E5;&#x76D8;&#x4EA4;&#x6613;&#x65F6;&#x95F4;&#x6BB5;&#x3001;&#x591C;&#x76D8;&#x4EA4;&#x6613;&#x65F6;&#x95F4;&#x6BB5;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x5728;&#x8FD9;&#x4E24;&#x4E2A;&#x4EA4;&#x6613;&#x65F6;&#x95F4;&#x6BB5;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x9700;&#x8981;&#x6392;&#x9664;&#x3002;</li>
+</ul>
+</blockquote>
+<h2 id="&#x4EA4;&#x6613;&#x6240;&#x6D4B;&#x8BD5;&#x6570;&#x636E;">&#x4EA4;&#x6613;&#x6240;&#x6D4B;&#x8BD5;&#x6570;&#x636E;</h2>
+<p>&#x4E3A;&#x4E86;&#x6D4B;&#x8BD5;&#x7CFB;&#x7EDF;&#x3001;&#x4FEE;&#x590D;&#x7A0B;&#x5E8F;&#x9519;&#x8BEF;&#x7B49;&#xFF0C;&#x4EA4;&#x6613;&#x6240;&#x5F80;&#x5F80;&#x4F1A;&#x63A8;&#x9001;&#x90E8;&#x5206;&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#x3002;&#x5343;&#x4E07;&#x8981;&#x8C28;&#x8BB0;&#xFF0C;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x4EC5;&#x505A;&#x6D4B;&#x8BD5;&#x4F7F;&#x7528;&#xFF0C;&#x5E76;&#x975E;&#x771F;&#x5B9E;&#x7684;&#x4EA4;&#x6613;&#x6570;&#x636E;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x8FD9;&#x90E8;&#x5206;&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#x9700;&#x8981;&#x4ECE;&#x6211;&#x4EEC;&#x7684;&#x6570;&#x636E;&#x5E93;&#x5220;&#x9664;&#x6389;&#x3002;</p>
+<ul>
+<li>&#x6570;&#x636E;&#x4E3A;&#x8D1F;&#xFF1A;&#x8FD9;&#x5305;&#x62EC;&#x4EF7;&#x683C;&#x6570;&#x636E;&#x548C;&#x6570;&#x91CF;&#x6570;&#x636E;&#xFF0C;&#x5982;<code>LastPrice</code>&#x3001;<code>OpenPrice</code>&#x3001;<code>HighestPrice</code>&#x3001;<code>LowestPrice</code>&#x3001;<code>ClosePrice</code>&#x3001;<code>Volume</code>&#x3001;<code>Turnover</code>&#x3001;<code>BidPrice</code>&#x3001;<code>BidVolume</code>&#x3001;<code>AskPrice</code>&#x3001;<code>AskVolume</code>&#x3001;<code>OpenInterest</code>&#x3002;&#x8FD9;&#x4E2A;&#x5F88;&#x5BB9;&#x6613;&#x7406;&#x89E3;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E9B;&#x53D8;&#x91CF;&#x7684;&#x8303;&#x56F4;&#x672C;&#x8EAB;&#x5E94;&#x8BE5;&#x662F; \( [0, N )\)&#xFF0C;&#x5176;&#x4E2D; \(N \in \mathbf{R}^{+} \) &#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x4EFB;&#x4F55;&#x8FD9;&#x7C7B;&#x53D8;&#x91CF;&#x4E3A;&#x8D1F;&#x6570;&#x7684;&#x6570;&#x636E;&#x884C;&#xFF0C;&#x90FD;&#x9700;&#x8981;&#x5220;&#x9664;&#x6389;&#x3002;</li>
+<li>&#x6570;&#x636E;&#x6807;&#x7B7E;&#x4E3A; <code>e+301</code> &#x7B49;&#x5F02;&#x5E38;&#x5927;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x771F;&#x5B9E;&#x7684; \(N &lt; \mathbf{\bar{N}} \) &#x3002;</li>
+</ul>
+<blockquote>
+<ul>
+<li>&#x6392;&#x9664;&#x4EF7;&#x683C;&#x6216;&#x6570;&#x91CF;&#x53D8;&#x91CF;&#x5C0F;&#x4E8E; 0 &#x7684;&#x6570;&#x636E;</li>
+<li>&#x6392;&#x9664;&#x6570;&#x636E;&#x5F02;&#x5E38;&#x5927;&#x7684;&#x3001;&#x660E;&#x663E;&#x662F;&#x4EA4;&#x6613;&#x6240;&#x7528;&#x4E8E;&#x6D4B;&#x8BD5;&#x76EE;&#x7684;&#x3001;&#x800C;&#x975E;&#x771F;&#x5B9E;&#x4EA4;&#x6613;&#x4EA7;&#x751F;&#x7684;&#x6570;&#x636E;</li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="&#x6570;&#x636E;&#x5197;&#x4F59;">&#x6570;&#x636E;&#x5197;&#x4F59;</h1>
+<p>&#x6240;&#x8C13;&#x7684;&#x5197;&#x4F59;&#x6570;&#x636E;&#xFF0C;&#x4E5F;&#x53EB;&#x505A;&#x91CD;&#x590D;&#x6570;&#x636E;&#xFF0C;&#x6307;&#x7684;&#x662F;&#x4EA4;&#x6613;&#x6240;&#x91CD;&#x590D;&#x63A8;&#x9001;&#x591A;&#x6B21;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x8FD9;&#x6837;&#x7684;&#x6570;&#x636E;&#x672C;&#x8D28;&#x4E0A;&#x4E0D;&#x4F1A;&#x6709;&#x65B0;&#x7684;&#x4FE1;&#x606F;&#x66F4;&#x65B0;&#xFF0C;&#x5C5E;&#x4E8E;&#x591A;&#x4F59;&#x7684;&#x6570;&#x636E;&#x566A;&#x97F3;&#x3002;</p>
+<h2 id="&#x91CD;&#x590D;&#x7684;&#x6570;&#x636E;">&#x91CD;&#x590D;&#x7684;&#x6570;&#x636E;</h2>
+<p>&#x5BF9;&#x4E8E;&#x76F8;&#x540C;&#x5B57;&#x6BB5;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4EA4;&#x6613;&#x6240;&#x63A8;&#x9001;&#x591A;&#x6B21;&#xFF0C;&#x6216;&#x8005;&#x672C;&#x5730;&#x7A0B;&#x5E8F;&#x5199;&#x5165;&#x591A;&#x6B21;</p>
+<h2 id="&#x4FE1;&#x606F;&#x65E0;&#x66F4;&#x65B0;&#x71B5;&#x51CF;">&#x4FE1;&#x606F;&#x65E0;&#x66F4;&#x65B0;(&#x71B5;&#x51CF;)</h2>
+<p>&#x4ECE;&#x7406;&#x8BBA;&#x4E0A;&#x8BB2;&#xFF0C;&#x4EA4;&#x6613;&#x6240;&#x63A8;&#x9001;&#x7684;&#x6570;&#x636E;&#x6309;&#x7167; <code>500 MilliSec</code>&#xFF0C;&#x5373; <code>.5 second</code> &#x7684;&#x9891;&#x7387;&#x6765;&#x66F4;&#x65B0;&#x63A8;&#x9001;&#x3002;&#x5BF9;&#x4E8E;&#x8FD9;&#x90E8;&#x5206;&#x6570;&#x636E;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x591A;&#x4F59;&#x7684;&#x4FE1;&#x606F;&#x91CF;&#x66F4;&#x65B0;&#xFF0C;&#x6BD4;&#x5982;&#x9664;&#x4E86;&#x65F6;&#x95F4;&#xFF0C;&#x5176;&#x4ED6;&#x6240;&#x6709;&#x7684;&#x5B57;&#x6BB5;&#x5B57;&#x6BB5;&#x90FD;&#x6CA1;&#x6709;&#x6539;&#x52A8;&#xFF0C;&#x8FD9;&#x5B9E;&#x8D28;&#x4E0A;&#x4E5F;&#x662F;&#x7B97;&#x5197;&#x4F59;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4E5F;&#x662F;&#x9700;&#x8981;&#x8003;&#x8651;&#x6392;&#x9664;&#x7684;&#x3002;</p>
+<blockquote>
+<ul>
+<li>&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x68C0;&#x6D4B;&#x76F8;&#x540C;&#x884C;&#x7684;&#x6570;&#x636E;&#x5E76;&#x8FDB;&#x884C;&#x6392;&#x9664;</li>
+<li>&#x53EA;&#x4FDD;&#x7559;&#x7B26;&#x5408;&#x71B5;&#x51CF;&#x539F;&#x5219;&#x7684;&#x6570;&#x636E;</li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="&#x6570;&#x636E;&#x4E0D;&#x5408;&#x903B;&#x8F91;">&#x6570;&#x636E;&#x4E0D;&#x5408;&#x903B;&#x8F91;</h1>
+<p>&#x5BF9;&#x4E8E;&#x6BCF;&#x4E00;&#x6761;&#x7531;&#x771F;&#x5B9E;&#x4EA4;&#x6613;&#x4EA7;&#x751F;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x90FD;&#x5E94;&#x8BE5;&#x7B26;&#x5408;&#x4E00;&#x5B9A;&#x7684;&#x903B;&#x8F91;&#x7ED3;&#x6784;&#x3002;&#x800C;&#x5BF9;&#x4E8E;&#x90A3;&#x4E9B;&#x4E0D;&#x7B26;&#x5408;&#x91D1;&#x878D;&#x903B;&#x8F91;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x53EF;&#x80FD;&#x662F;&#x5B58;&#x5728;&#x95EE;&#x9898;&#x7684;&#xFF0C;&#x9700;&#x8981;&#x6392;&#x9664;&#x3002;</p>
+<blockquote>
+<ul>
+<li>&#x6BCF;&#x6761;&#x4EF7;&#x683C;&#x548C;&#x6570;&#x91CF;&#x7684;&#x6570;&#x636E;&#x90FD;&#x6709;&#x6709;&#x610F;&#x4E49;&#x7684;&#xFF1A;&#x6BD4;&#x5982; <code>BidPrice</code> &#x548C; <code>AskPrice</code>&#x5FC5;&#x987B;&#x5728;&#x4E00;&#x5B9A;&#x7684;&#x53D8;&#x52A8;&#x8303;&#x56F4;&#x5185;&#xFF0C;&#x5373;&#xFF0C;\(x \in [LowerLimitPrice,UpperLimitPrice]\)&#xFF1B;&#x800C;&#x4E14;&#x4E0D;&#x540C;&#x7684;&#x53EB;&#x4EF7;&#x76F8;&#x5BF9;&#x987A;&#x5E8F;&#x662F;&#x5BF9;&#x7684;</li>
+<li>&#x6DA8;&#x505C;&#x677F;&#x65F6;&#xFF0C;&#x6709;&#x4EE5;&#x4E0B;&#x6761;&#x4EF6;&#x6210;&#x7ACB;&#xFF1A;<ul>
+<li>\(LastPrice = BidPrice = UpperLimitPrice\)</li>
+<li>\(BidVolume &gt; 0\) &#x4E14; \(AskVolume = 0\)</li>
+</ul>
+</li>
+<li>&#x8DCC;&#x505C;&#x677F;&#x65F6;&#xFF0C;&#x6709;&#x4EE5;&#x4E0B;&#x6761;&#x4EF6;&#x6210;&#x7ACB;&#xFF1A;<ul>
+<li>\(LastPrice = AskPrice = LowerLimitPrice\)</li>
+<li>\(BidVolume = 0\) &#x4E14; \(AskVolume &gt; 0\)</li>
+</ul>
+</li>
+<li>&#x975E;&#x6DA8;&#x8DCC;&#x505C;&#x677F;&#x65F6;&#xFF0C;&#x8981;&#x6C42; \(BidVolume \neq 0\) &#x4E14; \(AskVolume \neq 0\)</li>
+<li>&#x4EA4;&#x6613;&#x6240;&#x63A8;&#x9001;&#x7684; <code>Volume</code> &#x548C; <code>Turnover</code> &#x4E24;&#x4E2A;&#x5B57;&#x6BB5;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x8BA1;&#x7B97;&#x7D2F;&#x8BA1;&#x52A0;&#x603B;&#x7684;&#x6570;&#x503C;&#xFF0C;&#x5373;&#x6BCF;&#x53D1;&#x751F;&#x4E00;&#x7B14;&#x4EA4;&#x6613;&#xFF0C;&#x5C31;&#x7D2F;&#x8BA1;&#x589E;&#x52A0;&#x6570;&#x503C;&#x3002;&#x56E0;&#x6B64;<ul>
+<li><code>Volume</code> &#x7B26;&#x5408;&#x4E25;&#x683C;&#x5355;&#x8C03;&#x9012;&#x589E;</li>
+<li><code>Turnover</code> &#x7B26;&#x5408;&#x4E25;&#x683C;&#x5355;&#x8C03;&#x9012;&#x589E;</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
+2019-11-01 13:57:02
+</span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="mysql/operation.md" class="navigation navigation-prev " aria-label="Previous page: 数据库运维操作">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="期货数据库.md" class="navigation navigation-next " aria-label="Next page: 期货数据库">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"数据清理要点","level":"2.2.4","depth":2,"next":{"title":"期货数据库","level":"2.2.5","depth":2,"path":"dba/期货数据库.md","ref":"dba/期货数据库.md","articles":[]},"previous":{"title":"数据库运维操作","level":"2.2.3","depth":2,"path":"dba/mysql/operation.md","ref":"dba/mysql/operation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight","advanced-emoji","alerts"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"alerts":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"dba/数据清理要点.md","mtime":"2019-11-01T05:57:02.620Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-01T05:57:24.810Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
