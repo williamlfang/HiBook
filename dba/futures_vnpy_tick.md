@@ -9,6 +9,12 @@
 > 
 > @williamlfang
 
+> **[warning] 提醒**
+>
+> 一般我会把这个数据处理写成 `crontab` 任务，如果后面有出现错误，直接执行这个脚本即可
+> `20 15 * * 1-5 bash /home/fl/myData/shell/ProcessData_From188.sh`
+> 
+
 # TickData 数据
 
 我们可以看一下具体的 TickData 长什么样子的
@@ -196,4 +202,237 @@ read_from_vnpy <- function( tradingday, datafile ) {
 
     return( res )
 }
+```
+
+### 清洗数据
+
+这个需要实现设定好清洗的规则，然后使用过程函数进行逐步的处理即可。我将其打包在了一个函数进行处理，具体的函数依然可以查看 `ChinaFutures_HisotryData_02_clean_data.R`
+
+```r
+## =============================================================================
+## 2.clean data
+## -----------
+source( 
+    sprintf( 
+        "%s/ChinaFutures_HisotryData_02_clean_data.R", 
+        "/home/fl/myData/R/ChinaFutures/HistoryData"
+    ) 
+)
+```
+
+### 检查数据断点情况
+
+如果发现断点持续时间超过阈值，则发送邮件通知数据库管理员。
+
+```r
+## 检查断点
+brk <- lapply( c( 'night','day1','day2' ), function( sectorid ){
+        if ( sectorid == 'night' ) {
+            time_range <- c( -11100, 9300 )
+        } else if ( sectorid == 'day1' ) {
+            time_range <- c( 8*3600 + 55*60, 11*3600 + 35*60 )
+        } else if( sectorid == 'day2' ) {
+            time_range <- c( 12*3600 + 55*60, 15*3600 + 15*60 )
+        }
+        ## ---------------------------------------------------------------------
+        res <- tick[NumeriTimeStamp %between% time_range & NumericExchTime %between% time_range, 
+                    .( TimeStamp, UpdateTime, NumeriTimeStamp, NumericExchTime )
+                    ] %>% 
+            .[order( NumeriTimeStamp )] %>%
+            .[, deltaTime := round(NumeriTimeStamp - shift( NumeriTimeStamp, 1L ), 2)] %>%
+            .[!is.na( deltaTime )]
+        ## ---------------------------------------------------------------------
+    } ) %>% rbindlist()
+if ( nrow( brk[deltaTime > 60*1.5] ) > 5 ) {
+    library(emayili)
+    # First create a message object.
+    email <- envelope()
+    # Add addresses for the sender and recipient.
+    email <- email %>%
+      from("fl@hicloud-investment.com") %>%
+      to(c("fl@hicloud-investment.com",
+           "lhg@hicloud-investment.com",
+           "lj@hicloud-investment.com")
+        )
+    # Add a subject.
+    email <- email %>% subject(sprintf("%s[ERROR]", tradingday))
+    # Add a body.
+    fwrite( brk[deltaTime > 60*1.5, .( TimeStamp, UpdateTime, deltaTime)] , '/tmp/brk.csv' )
+    email <- email %>% body(
+        sprintf("数据有断点. 请检查 TickData 是否完整.\n或者更换数据源.\n%s",
+                paste(readLines('/tmp/brk.csv'), collapse= '\n')
+                )
+        )
+    # Add an attachment.
+    #email <- email %>% attachment("image.jpg")
+    # Create a SMTP server object and send the message.
+    smtp <- server(host = "smtp.exmail.qq.com",
+                   port = 25,
+                   username = "fl@hicloud-investment.com",
+                   password = "r78RXHtrfxXD2HCt")
+    smtp(email, verbose = TRUE)
+    stop( "数据有断点 !!!" )
+}
+## =============================================================================
+```
+
+### 生成 Bar 数据
+
+- 使用并行计算分钟数据
+- 从分钟数据汇总得到日行情数据
+
+```r
+## =============================================================================
+## 3.generate bar
+tick <- tick %>%
+    .[nchar( InstrumentID ) <= 6] %>%
+    .[DeltaVolume > 0] %>% 
+    .[, Minute := sprintf( "%02d:%02d",UpdateHour,UpdateMinute )] %>% 
+    setkey( ., TradingDay, InstrumentID,Minute ) %>%
+    .[order( InstrumentID,NumericExchTime,Volume )]
+
+system.time( {
+    mbar <- tick[, .( 
+        NumericExchTime = .SD[1, NumericExchTime],
+        ## -------------------------------
+        OpenPrice = .SD[1, LastPrice], 
+        HighPrice = .SD[, max( LastPrice, na.rm=TRUE )],
+        LowPrice = .SD[, min( LastPrice, na.rm=TRUE )],     
+        ClosePrice = .SD[.N, LastPrice],
+        ## -------------------------------
+        # wOpenPrice = .SD[1, 
+        #     (AskPrice1 * AskVolume1 + BidPrice1 * BidVolume1) / ( AskVolume1 + BidVolume1 )],
+        # wHighPrice = .SD[which.max( LastPrice ), 
+        #     (AskPrice1 * AskVolume1 + BidPrice1 * BidVolume1) / ( AskVolume1 + BidVolume1 )],
+        # wLowPrice = .SD[which.min( LastPrice ), 
+        #     (AskPrice1 * AskVolume1 + BidPrice1 * BidVolume1) / ( AskVolume1 + BidVolume1 )],
+        # wClosePrice = .SD[.N, 
+        #     (AskPrice1 * AskVolume1 + BidPrice1 * BidVolume1) / ( AskVolume1 + BidVolume1 )],
+        ## -------------------------------
+        Volume = .SD[, sum( DeltaVolume )],
+        Turnover = .SD[, sum( DeltaTurnover )],
+        ## -------------------------------
+        OpenOpenInterest = .SD[1, OpenInterest],
+        HighOpenInterest = .SD[, max( OpenInterest, na.rm=TRUE)],
+        LowOpenInterest = .SD[, min( OpenInterest, na.rm=TRUE)],
+        CloseOpenInterest = .SD[.N, OpenInterest],
+        ## -------------------------------
+        UpperLimitPrice = .SD[, max( UpperLimitPrice,na.rm=TRUE )],
+        LowerLimitPrice = .SD[, max( LowerLimitPrice,na.rm=TRUE )]
+        ), by = c( "TradingDay","InstrumentID","Minute" )] %>% 
+        .[, ":="( SettlementPrice = NA)]
+    # cols <- c( 'wOpenPrice','wClosePrice' )
+    # mbar[, ( cols ) := lapply( .SD, round, 2 ), .SDcols = cols]
+} )
+
+if ( FALSE ) {
+    ## 20:55:00 ~ 02:35:00 / 08:55:00 ~ 15:15:00
+    ## 20:55:00  : ( 20*3600 + 55*60 - 86400 )  : -11100
+    ## 02:35:00  : ( 2*3600 + 35*60 )           : 9300         
+    ## 08:55:00  : ( 8*3600 + 55*60 )           : 32100
+    ## 11:35:00  : ( 11*3600 + 35*60 )          : 41700
+    ## 12:55:00  : ( 12*3600 + 55*60 )          : 46500
+    ## 15:15:00  : ( 15*3600 + 15*60 )          : 54900
+}
+
+system.time( {
+    dbar <- lapply( c( 'allday','night','day' ), function( sectorid ){
+        if ( sectorid == 'allday' ) {
+            time_range <- c( -11100, 54900 )
+        } else if ( sectorid == 'night' ) {
+            time_range <- c( -11100, 9300 )
+        } else if ( sectorid == 'day' ) {
+            time_range <- c( 32100, 54900 )
+        }
+
+        res <- tick[NumeriTimeStamp %between% time_range & NumericExchTime %between% time_range, .( 
+            ## -------------------------------
+            OpenPrice = .SD[1, LastPrice], 
+            HighPrice = .SD[, max( LastPrice, na.rm=TRUE )],
+            LowPrice = .SD[, min( LastPrice, na.rm=TRUE )],     
+            ClosePrice = .SD[.N, LastPrice],
+            ## -------------------------------
+            Volume = .SD[, sum( DeltaVolume )],
+            Turnover = .SD[, sum( DeltaTurnover )],
+            ## -------------------------------
+            OpenOpenInterest = .SD[1, OpenInterest],
+            HighOpenInterest = .SD[, max( OpenInterest, na.rm=TRUE)],
+            LowOpenInterest = .SD[, min( OpenInterest, na.rm=TRUE)],
+            CloseOpenInterest = .SD[.N, OpenInterest],
+            ## -------------------------------
+            UpperLimitPrice = .SD[, max( UpperLimitPrice,na.rm=TRUE )],
+            LowerLimitPrice = .SD[, max( LowerLimitPrice,na.rm=TRUE )]
+            ## -------------------------------
+            ), by = c( "TradingDay","InstrumentID")] %>% 
+            .[, ":="( SettlementPrice = NA, Sector = sectorid )]
+    } ) %>% rbindlist()
+} )
+## =============================================================================
+```
+
+### 入库
+
+```r
+## =============================================================================
+## 4.save to mysql
+for ( k in c( 'daily','minute' ) ) {
+    mysqlSend( 
+        db = 'china_futures_bar',
+        query = sprintf("delete from %s
+                         where TradingDay = %s",
+                         k, tradingday
+                         ),
+        host = '192.168.1.166'
+    )
+}
+
+mysqlWrite( 
+    db = 'china_futures_bar',
+    tbl = 'minute',
+    data = mbar,
+    host = '192.168.1.166'
+)
+
+mysqlWrite( 
+    db = 'china_futures_bar',
+    tbl = 'daily',
+    data = dbar
+)
+```
+
+# 处理其他数据信息
+
+## 处理合约信息数据
+
+```r
+try(source('./vnpyRcpp_05_info.R'))
+```
+
+## 计算主力合约
+
+```r
+rint(paste0("#---------- Update MainContract Information  ---------------------#"))
+source('/home/fl/myData/R/Rconfig/MainContract_00_main.R')
+print(paste0("#-----------------------------------------------------------------#"))
+```
+
+## 计算当日的开平仓的盈亏
+
+```r
+ry(
+    system('/home/fl/anaconda2/bin/python /home/fl/myData/python/hicloud_exmail_PnL.py'),
+    silent = TRUE
+)
+```
+
+# 结束程序
+
+```r
+## -------------------------------------------------------------------------
+suppFunction( {
+    try({
+        rm( tick ); rm( mbar ); rm( dbar )
+        } , silent = TRUE)
+} )
+## -------------------------------------------------------------------------
 ```
