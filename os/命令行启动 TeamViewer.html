@@ -1,0 +1,623 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>命令行启动 TeamViewer · HiBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="方莲">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-dracula.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="centos/CentOS7命令行设置分辨率.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://williamlfang.github.io/" target="_blank" class="custom-link">William's Blog</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    关于
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">服务器运维</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" >
+            
+                <span>
+            
+                    
+                    [CentOS7 操作系统]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="centos/centos7.html">
+            
+                <a href="centos/centos7.html">
+            
+                    
+                    安装与配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="centos/LLVM 扩展逻辑磁盘.html">
+            
+                <a href="centos/LLVM 扩展逻辑磁盘.html">
+            
+                    
+                    LLVM 扩展逻辑磁盘
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="frp.html">
+            
+                <a href="frp.html">
+            
+                    
+                    内网穿透
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" data-path="centos/gcc.html">
+            
+                <a href="centos/gcc.html">
+            
+                    
+                    升级gcc
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.5" data-path="centos/CentOS7命令行设置分辨率.html">
+            
+                <a href="centos/CentOS7命令行设置分辨率.html">
+            
+                    
+                    命令行设置分辨率
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.1.6" data-path="命令行启动 TeamViewer.html">
+            
+                <a href="命令行启动 TeamViewer.html">
+            
+                    
+                    命令行启动 TeamViewer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" >
+            
+                <span>
+            
+                    
+                    [MySQL 数据库]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="../dba/mysql/datapath.md">
+            
+                <span>
+            
+                    
+                    修改数据存储目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="../dba/mysql/database.md">
+            
+                <span>
+            
+                    
+                    建立数据库命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.3" data-path="../dba/mysql/operation.md">
+            
+                <span>
+            
+                    
+                    数据库运维操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.4" data-path="../dba/数据清理要点.md">
+            
+                <span>
+            
+                    
+                    数据清理要点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.5" data-path="../dba/期货数据库.md">
+            
+                <span>
+            
+                    
+                    期货数据库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.6" data-path="../dba/股票数据库.md">
+            
+                <span>
+            
+                    
+                    股票数据库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">交易系统开发</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../trading/vnpy.md">
+            
+                <span>
+            
+                    
+                    vnpy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../trading/ctp.md">
+            
+                <span>
+            
+                    
+                    期货
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../trading/xtp.md">
+            
+                <span>
+            
+                    
+                    股票
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >命令行启动 TeamViewer</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <blockquote>
+<p><strong>[info] TeamViewer</strong></p>
+<p>&#x901A;&#x8FC7;&#x547D;&#x4EE4;&#x884C;&#x63A7;&#x5236;&#x8FDC;&#x7A0B;&#x670D;&#x52A1;&#x5668;&#x7684; TeamViewer&#xFF0C;&#x5B9E;&#x73B0;&#x83B7;&#x53D6;&#x8D26;&#x6237;&#x3001;&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;&#x7B49;&#x529F;&#x80FD;&#x3002;</p>
+</blockquote>
+<h1 id="&#x8FDE;&#x63A5;&#x8FDC;&#x7A0B;&#x670D;&#x52A1;&#x5668;">&#x8FDE;&#x63A5;&#x8FDC;&#x7A0B;&#x670D;&#x52A1;&#x5668;</h1>
+<p>&#x6211;&#x4EEC;&#x901A;&#x8FC7; <code>TeamViewer</code> &#x8FDE;&#x63A5;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;&#x7684;&#x76D1;&#x63A7;&#x5230;&#x8FDC;&#x7A0B;&#x670D;&#x52A1;&#x5668;&#x7684;&#x8FD0;&#x884C;&#x72B6;&#x51B5;&#xFF0C;&#x6BD4;&#x5982;&#x4EA4;&#x6613;&#x7CFB;&#x7EDF;&#x7684;&#x754C;&#x9762;&#x662F;&#x5426;&#x6B63;&#x5E38;&#x542F;&#x52A8;&#x3001;&#x76F8;&#x5173;&#x7684; <code>crontab</code> &#x64CD;&#x4F5C;&#x662F;&#x5426;&#x53CA;&#x65F6;&#x5F00;&#x542F;&#x7B49;&#x3002;</p>
+<p>&#x53EF;&#x662F;&#xFF0C;&#x5982;&#x679C; <code>TeamVierer</code> &#x7531;&#x4E8E;&#x67D0;&#x79CD;&#x539F;&#x56E0;&#x800C;&#x7EC8;&#x7AEF;&#x4E86;&#xFF08;&#x6BD4;&#x5982;&#x4E0D;&#x5C0F;&#x5FC3;&#x628A;&#x8FDB;&#x7A0B;&#x505C;&#x6B62;&#x6389;&#x3001;&#x5176;&#x4ED6;&#x7A0B;&#x5E8F;&#x7684;&#x5E72;&#x6270;&#x7B49;&#xFF09;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x4FBF;&#x65E0;&#x6CD5;&#x901A;&#x8FC7;&#x754C;&#x9762;&#x5316;&#x7684;&#x64CD;&#x4F5C;&#x6765;&#x8FDE;&#x63A5;&#x3002;&#x90A3;&#x4E48;&#x5269;&#x4E0B;&#x7684;&#x552F;&#x4E00;&#x65B9;&#x6CD5;&#x8FDE;&#x63A5;&#x8FDC;&#x7A0B;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x5373;&#x901A;&#x8FC7; <code>ssh</code> &#x901A;&#x9053;&#x6765;&#x8FDE;&#x63A5;&#x3002;&#x800C;&#x6B63;&#x662F;&#x901A;&#x8FC7; <code>ssh</code> &#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x547D;&#x4EE4;&#x884C;&#x6765;&#x63A7;&#x5236;&#x8FDC;&#x7A0B;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x8FDB;&#x884C;&#x76F8;&#x5E94;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x90A3;&#x4E48;&#x95EE;&#x9898;&#x6765;&#x4E86;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x547D;&#x4EE4;&#x884C;&#x6765;&#x63A7;&#x5236;&#x5F00;&#x542F; <code>TeamViewer</code> &#x4E48;&#xFF1F;&#x5982;&#x679C;&#x662F;&#x53EF;&#x4EE5;&#xFF0C;&#x53EF;&#x662F;&#x6211;&#x4EEC;&#x65E0;&#x6CD5;&#x770B;&#x5230;&#x754C;&#x9762;&#xFF0C;&#x53C8;&#x600E;&#x4E48;&#x6765;&#x83B7;&#x53D6;&#x76F8;&#x5E94;&#x7684;&#x63A5;&#x5165;&#x5BC6;&#x7801;&#x5462;&#xFF1F;</p>
+<h1 id="&#x547D;&#x4EE4;&#x884C;&#x63A7;&#x5236;-teamviewer">&#x547D;&#x4EE4;&#x884C;&#x63A7;&#x5236; <code>TeamViewer</code></h1>
+<p>&#x5176;&#x5B9E;&#xFF0C;<code>TeamViewer</code> &#x81EA;&#x5E26;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x5957;&#x547D;&#x4EE4;&#x884C;&#x7684;&#x64CD;&#x4F5C;&#x3002;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x60F3;&#x8981;</p>
+<ul>
+<li>&#x628A;&#x539F;&#x6765;&#x7684; <code>TeamViewer</code> &#x8FDB;&#x7A0B;&#x5173;&#x95ED;&#x6389;</li>
+<li>&#x7136;&#x540E;&#x518D;&#x5F00;&#x542F;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x8FDB;&#x7A0B;</li>
+<li>&#x628A;&#x76F8;&#x5E94;&#x7684; <code>TeamViewer</code> &#x8FDE;&#x63A5;&#x8D26;&#x6237;&#x6253;&#x5370;&#x5230;&#x7EC8;&#x7AEF;</li>
+<li>&#x5141;&#x8BB8;&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;</li>
+</ul>
+<p>&#x5982;&#x6B64;&#x4E00;&#x6765;&#xFF0C;&#x6211;&#x4EEC;&#x4FBF;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8D26;&#x6237;&#x548C;&#x63A5;&#x5165;&#x5BC6;&#x7801;&#x518D;&#x91CD;&#x65B0;&#x901A;&#x8FC7;&#x754C;&#x9762;&#x5316;&#x767B;&#x5F55;&#x8FDC;&#x7A0B;&#x670D;&#x52A1;&#x5668;&#x4E86;&#x3002;</p>
+<p>&#x4EE5;&#x4E0B;&#x7684;&#x547D;&#x4EE4;&#x6211;&#x5747;&#x5047;&#x5B9A;&#x4F7F;&#x7528; <code>root</code> &#x8D26;&#x6237;&#x6743;&#x9650;&#x3002;</p>
+<h2 id="&#x505C;&#x6B62;&#x5F00;&#x542F;">&#x505C;&#x6B62;/&#x5F00;&#x542F;</h2>
+<pre class="language-"><code class="lang-{bash}">## &#x542F;&#x52A8;&#x6216;&#x505C;&#x6B62; daemon
+sudo teamviewer --daemon stop
+
+sudo teamviewer --daemon start
+</code></pre>
+<h2 id="&#x6253;&#x5370;&#x8D26;&#x53F7;">&#x6253;&#x5370;&#x8D26;&#x53F7;</h2>
+<pre class="language-"><code class="lang-{bash}">## &#x6253;&#x5370; id
+sudo teamviewer --info print id
+</code></pre>
+<h2 id="&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;">&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;</h2>
+<pre class="language-"><code class="lang-{bash}">## &#x8BBE;&#x7F6E;&#x5BC6;&#x7801;
+sudo teamviewer --passwd <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>password</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<pre class="language-"><code class="lang-{bash}">william@william-PC ~ $ ps -aux | grep teamviewer
+root     13073  1.4  0.1 186112 14112 ?        Sl   11:57   0:00 /opt/teamviewer/tv_bin/teamviewerd -d
+william  13238  1.4  0.0   6356  3360 ?        Ss   11:57   0:00 /opt/teamviewer/tv_bin/wine/bin/wineserver
+william  13266  0.3  0.1 1128472 15612 ?       Sl   11:57   0:00 /opt/teamviewer//tv_bin/TVGuiSlave.64 31 1
+william  13267  1.6  0.4 141060 33760 ?        Sl   11:57   0:00 /opt/teamviewer//tv_bin/TVGuiDelegate 31 1
+william  13314  0.0  0.0  15932   932 pts/5    S+   11:57   0:00 grep --color=auto teamviewer
+william@william-PC ~ $ sudo teamviewer --daemon stop
+
+systemctl stop teamviewerd.service
+
+william@william-PC ~ $ sudo teamviewer --daemon start
+
+systemctl start teamviewerd.service
+
+william@william-PC ~ $ sudo teamviewer --info print id
+
+ TeamViewer                           12.0.76279  (DEB) 
+
+ teamviewerd status                   &#x25CF; teamviewerd.service - TeamViewer remote control daemon
+   Loaded: loaded (/etc/systemd/system/teamviewerd.service; enabled; vendor preset: enabled)
+   Active: active (running) since Fri 2018-01-26 11:57:38 CST; 9s ago
+  Process: 13377 ExecStart=/opt/teamviewer/tv_bin/teamviewerd -d (code=exited, status=0/SUCCESS)
+ Main PID: 13380 (teamviewerd)
+   CGroup: /system.slice/teamviewerd.service
+           &#x251C;&#x2500;13380 /opt/teamviewer/tv_bin/teamviewerd -d
+           &#x251C;&#x2500;13401 c:\TeamViewer\TeamViewer.exe                                                                                    
+           &#x251C;&#x2500;13544 /opt/teamviewer/tv_bin/wine/bin/wineserver
+           &#x251C;&#x2500;13559 C:\windows\system32\services.exe                                                                                    
+           &#x251C;&#x2500;13563 C:\windows\system32\explorer.exe /desktop                                                                                    
+           &#x251C;&#x2500;13572 /opt/teamviewer//tv_bin/TVGuiSlave.64 31 1
+           &#x2514;&#x2500;13573 /opt/teamviewer//tv_bin/TVGuiDelegate 31 1
+
+Jan 26 11:57:37 william-PC systemd[1]: Starting TeamViewer remote control daemon...
+Jan 26 11:57:38 william-PC systemd[1]: teamviewerd.service: PID file /var/run/teamviewerd.pid not readable (yet?) after start: No such file or directory
+Jan 26 11:57:38 william-PC systemd[1]: Started TeamViewer remote control daemon.
+Jan 26 11:57:38 william-PC su[13403]: Successful su for william by root
+Jan 26 11:57:38 william-PC su[13403]: + ??? root:william
+Jan 26 11:57:38 william-PC su[13403]: pam_unix(su:session): session opened for user william by (uid=0) 
+
+ TeamViewer ID:                        337563997 
+
+william@william-PC ~ $ sudo teamviewer --passwd helloworld123
+
+ok
+</code></pre>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
+2019-11-01 12:13:26
+</span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="centos/CentOS7命令行设置分辨率.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 命令行设置分辨率">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"命令行启动 TeamViewer","level":"2.1.6","depth":2,"next":{"title":"[MySQL 数据库]","level":"2.2","depth":1,"ref":"","articles":[{"title":"修改数据存储目录","level":"2.2.1","depth":2,"path":"dba/mysql/datapath.md","ref":"dba/mysql/datapath.md","articles":[]},{"title":"建立数据库命令","level":"2.2.2","depth":2,"path":"dba/mysql/database.md","ref":"dba/mysql/database.md","articles":[]},{"title":"数据库运维操作","level":"2.2.3","depth":2,"path":"dba/mysql/operation.md","ref":"dba/mysql/operation.md","articles":[]},{"title":"数据清理要点","level":"2.2.4","depth":2,"path":"dba/数据清理要点.md","ref":"dba/数据清理要点.md","articles":[]},{"title":"期货数据库","level":"2.2.5","depth":2,"path":"dba/期货数据库.md","ref":"dba/期货数据库.md","articles":[]},{"title":"股票数据库","level":"2.2.6","depth":2,"path":"dba/股票数据库.md","ref":"dba/股票数据库.md","articles":[]}]},"previous":{"title":"命令行设置分辨率","level":"2.1.5","depth":2,"path":"os/centos/CentOS7命令行设置分辨率.md","ref":"os/centos/CentOS7命令行设置分辨率.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","pageview-count","popup","tbfed-pagefooter","todo","prism","-highlight"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"pageview-count":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"os/命令行启动 TeamViewer.md","mtime":"2019-11-01T04:13:26.871Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-01T05:49:38.471Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
