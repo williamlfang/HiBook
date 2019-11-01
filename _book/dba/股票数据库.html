@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>股票 · HiBook</title>
+        <title>股票数据库 · HiBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -89,8 +89,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="../trading/vnpy.html" />
     
-    <link rel="prev" href="ctp.html" />
+    
+    <link rel="prev" href="期货数据库.md" />
     
 
     </head>
@@ -259,9 +261,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.2.1" data-path="../dba/mysql/datapath.html">
+        <li class="chapter " data-level="2.2.1" data-path="mysql/datapath.html">
             
-                <a href="../dba/mysql/datapath.html">
+                <a href="mysql/datapath.html">
             
                     
                     修改数据存储目录
@@ -272,9 +274,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.2" data-path="../dba/mysql/database.html">
+        <li class="chapter " data-level="2.2.2" data-path="mysql/database.html">
             
-                <a href="../dba/mysql/database.html">
+                <a href="mysql/database.html">
             
                     
                     建立数据库命令
@@ -285,7 +287,7 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.3" data-path="../dba/mysql/operation.md">
+        <li class="chapter " data-level="2.2.3" data-path="mysql/operation.md">
             
                 <span>
             
@@ -298,9 +300,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.4" data-path="../dba/数据清理要点.html">
+        <li class="chapter " data-level="2.2.4" data-path="数据清理要点.html">
             
-                <a href="../dba/数据清理要点.html">
+                <a href="数据清理要点.html">
             
                     
                     数据清理要点
@@ -311,7 +313,7 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.5" data-path="../dba/期货数据库.md">
+        <li class="chapter " data-level="2.2.5" data-path="期货数据库.md">
             
                 <span>
             
@@ -324,9 +326,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.6" data-path="../dba/股票数据库.html">
+        <li class="chapter active" data-level="2.2.6" data-path="股票数据库.html">
             
-                <a href="../dba/股票数据库.html">
+                <a href="股票数据库.html">
             
                     
                     股票数据库
@@ -349,9 +351,9 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="vnpy.html">
+        <li class="chapter " data-level="3.1" data-path="../trading/vnpy.html">
             
-                <a href="vnpy.html">
+                <a href="../trading/vnpy.html">
             
                     
                     vnpy
@@ -362,9 +364,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="ctp.html">
+        <li class="chapter " data-level="3.2" data-path="../trading/ctp.html">
             
-                <a href="ctp.html">
+                <a href="../trading/ctp.html">
             
                     
                     期货
@@ -375,9 +377,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.3" data-path="xtp.html">
+        <li class="chapter " data-level="3.3" data-path="../trading/xtp.html">
             
-                <a href="xtp.html">
+                <a href="../trading/xtp.html">
             
                     
                     股票
@@ -418,7 +420,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >股票</a>
+        <a href=".." >股票数据库</a>
     </h1>
 </div>
 
@@ -433,8 +435,66 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2019-11-01 13:58:36
+                                <blockquote>
+<p><strong>[info] ChinaStocks&#xFF1A;&#x80A1;&#x7968;&#x6570;&#x636E;&#x5E93;</strong>
+&#x76EE;&#x524D;&#x6211;&#x4EEC;&#x81EA;&#x5EFA;&#x4E2D;&#x56FD;&#x80A1;&#x7968;&#x7684;&#x884C;&#x60C5;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x901A;&#x8FC7;&#x83B7;&#x53D6;&#x80A1;&#x7968; <code>Tick</code> &#x5B9E;&#x76D8;&#x884C;&#x60C5;&#x3001;&#x7F16;&#x5199;&#x5904;&#x7406;&#x811A;&#x672C;&#x8FDB;&#x884C;&#x6E05;&#x6D17;&#x3001;&#x81EA;&#x52A8;&#x76D1;&#x63A7;&#x6570;&#x636E;&#x5E76;&#x6700;&#x7EC8;&#x5F55;&#x5165;&#x6570;&#x636E;&#x5E93;&#x3002; 
+&#x540C;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x91C7;&#x8D2D;&#x4E86;&#x7B2C;&#x4E09;&#x65B9;&#x7684;&#x6570;&#x636E;&#x6E90;&#xFF0C;&#x5B9E;&#x73B0;&#x4E86;&#x4E0A;&#x5E02;&#x516C;&#x53F8;&#x57FA;&#x672C;&#x4FE1;&#x606F;&#x3001;&#x8D22;&#x52A1;&#x4FE1;&#x606F;&#x3001;&#x884C;&#x4E1A;&#x4FE1;&#x606F;&#x7B49;&#x591A;&#x4E2A;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x7684;&#x65E5;&#x5E38;&#x66F4;&#x65B0;&#x3002;</p>
+</blockquote>
+<p>&#x76EE;&#x524D;&#x4E3B;&#x8981;&#x6709;&#x4EE5;&#x4E0B;&#x6570;&#x636E;&#x5E93;</p>
+<ul>
+<li><p><code>china_stocks_bar</code>&#xFF1A;&#x80A1;&#x7968;&#x7684;&#x884C;&#x60C5;&#x6570;&#x636E;&#xFF0C;&#x5305;&#x542B; <code>daily</code>&#x3001;<code>minute</code>&#x3002;</p>
+<pre class="language-"><code class="lang-bash">  CREATE DATABASE <span class="token variable"><span class="token variable">`</span>china_stocks_bar<span class="token variable">`</span></span> DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci<span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li><p><code>china_stocks_info</code>&#xFF1A;&#x80A1;&#x7968;&#x7684;&#x57FA;&#x672C;&#x4FE1;&#x606F;&#x6570;&#x636E;&#xFF0C;&#x5305;&#x542B;&#x516C;&#x53F8;&#x6982;&#x51B5;&#x3001;&#x8D22;&#x52A1;&#x6570;&#x636E;&#x3001;&#x884C;&#x4E1A;&#x6570;&#x636E;&#x3001;&#x6307;&#x6570;&#x6210;&#x5206;</p>
+<pre class="language-"><code class="lang-bash">  CREATE DATABASE <span class="token variable"><span class="token variable">`</span>china_stocks_info<span class="token variable">`</span></span> DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci<span class="token punctuation">;</span>
+</code></pre>
+</li>
+</ul>
+<h1 id="chinastocksbar"><code>china_stocks_bar</code></h1>
+<h2 id="daily"><code>daily</code></h2>
+<pre class="language-"><code class="lang-mysql">################################################################################
+## china_stocks_bar.daily
+################################################################################
+CREATE TABLE  china_stocks_bar.daily(
+    TradingDay      DATE             NOT NULL,          ## &#x4EA4;&#x6613;&#x65E5;&#x671F;
+    ExchID          CHAR(2)          NOT NULL,          ## &#x4EA4;&#x6613;&#x6240;&#x4EE3;&#x7801;: 
+    StockID         CHAR(6)          NOT NULL,          ## &#x80A1;&#x7968;&#x4EE3;&#x7801;: 
+    StockName       VARCHAR(30),                        ## &#x80A1;&#x7968;&#x540D;&#x79F0;: 
+    #------------------------------------------------------
+    Open            DECIMAL(10,3),                      ## &#x5F00;&#x76D8;&#x4EF7;
+    High            DECIMAL(10,3),                      ## &#x5F00;&#x76D8;&#x4EF7;
+    Low             DECIMAL(10,3),                      ## &#x5F00;&#x76D8;&#x4EF7;
+    Close           DECIMAL(10,3),                      ## &#x5F00;&#x76D8;&#x4EF7;
+    #-----------------------------------------------------
+    BFactor         DECIMAL(15,6),                      ## &#x540E;&#x590D;&#x6743;&#x56E0;&#x5B50;
+    #-----------------------------------------------------
+    Volume          BIGINT,                             ## &#x4EA4;&#x6613;&#x91CF;&#xFF0C; &#x80A1;
+    Amount          DECIMAL(30,3),                      ## &#x4EA4;&#x6613;&#x989D;&#xFF0C;&#x5143;
+    #-----------------------------------------------------
+    UpperLimit      DECIMAL(10,3),                      ## &#x6DA8;&#x505C;&#x4EF7;
+    LowerLimit      DECIMAL(10,3),                      ## &#x8DCC;&#x505C;&#x4EF7;
+    Status          VARCHAR(30),                        ## &#x4EA4;&#x6613;&#x72B6;&#x6001;
+    IsLimit         CHAR(10),                           ## &#x6DA8;&#x8DCC;&#x505C;&#x6807;&#x8BC6;
+                                                        ## 1. u: &#x6DA8;&#x505C;
+                                                        ## 2, l&#xFF1A;&#x8DCC;&#x505C;
+    IfST            CHAR(10),                           ## &#x662F;&#x5426; st:
+                                                        ## 1. y: &#x662F;st
+                                                        ## 2. n&#xFF1A;&#x4E0D;&#x662F;st
+    #-----------------------------------------------------
+    PRIMARY KEY (TradingDay, ExchID, StockID),          ## &#x4E3B;&#x952E;&#x552F;&#x4E00;&#xFF0C;&#x91CD;&#x590D;&#x4E0D;&#x53EF;&#x8F93;&#x5165;
+    KEY `TradingDay` (`TradingDay`),
+    KEY `StockID` (`StockID`)
+    );
+
+##----------- INDEX --------------------------------------------------------- ##
+CREATE INDEX index_daily
+ON china_stocks_bar.daily
+(TradingDay, StockID);  
+## -------------------------------------------------------------------------- ##
+</code></pre>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
+2019-11-01 14:10:01
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -463,10 +523,14 @@
 
             
                 
-                <a href="ctp.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 期货">
+                <a href="期货数据库.md" class="navigation navigation-prev " aria-label="Previous page: 期货数据库">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="../trading/vnpy.html" class="navigation navigation-next " aria-label="Next page: vnpy">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -475,7 +539,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"股票","level":"3.3","depth":1,"previous":{"title":"期货","level":"3.2","depth":1,"path":"trading/ctp.md","ref":"trading/ctp.md","articles":[]},"dir":"neutral"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","advanced-emoji","alerts"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"alerts":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"trading/xtp.md","mtime":"2019-11-01T05:58:36.701Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-01T06:10:11.512Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"股票数据库","level":"2.2.6","depth":2,"next":{"title":"vnpy","level":"3.1","depth":1,"path":"trading/vnpy.md","ref":"trading/vnpy.md","articles":[]},"previous":{"title":"期货数据库","level":"2.2.5","depth":2,"path":"dba/期货数据库.md","ref":"dba/期货数据库.md","articles":[]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","advanced-emoji","alerts"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"alerts":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"dba/股票数据库.md","mtime":"2019-11-01T06:10:01.963Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-01T06:10:11.512Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
