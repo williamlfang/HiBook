@@ -1,6 +1,6 @@
 # HiBook
 
-> 汉云投资**技术手册**.
+> **[info] 汉云投资技术手册**
 >
 > A Technical Handbook for HiCloud Investment.
 >
@@ -18,7 +18,7 @@
 - [lzx]()
 - [lj]()
 
-> **[info] 版权说明**
+> **[success] 版权说明**
 >
 > 本项目一切版权归[厦门汉云投资管理有限公司](http://www.hicloud-investment.com/)所有。
 
