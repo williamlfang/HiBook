@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>期货 · HiBook</title>
+        <title>期货Tick数据处理 · HiBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -89,10 +89,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="xtp.html" />
+    <link rel="next" href="期货数据库.md" />
     
     
-    <link rel="prev" href="vnpy.html" />
+    <link rel="prev" href="数据清理要点.html" />
     
 
     </head>
@@ -261,9 +261,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.2.1" data-path="../dba/mysql/datapath.html">
+        <li class="chapter " data-level="2.2.1" data-path="mysql/datapath.html">
             
-                <a href="../dba/mysql/datapath.html">
+                <a href="mysql/datapath.html">
             
                     
                     修改数据存储目录
@@ -274,9 +274,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.2" data-path="../dba/mysql/database.html">
+        <li class="chapter " data-level="2.2.2" data-path="mysql/database.html">
             
-                <a href="../dba/mysql/database.html">
+                <a href="mysql/database.html">
             
                     
                     建立数据库命令
@@ -287,7 +287,7 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.3" data-path="../dba/mysql/operation.md">
+        <li class="chapter " data-level="2.2.3" data-path="mysql/operation.md">
             
                 <span>
             
@@ -300,9 +300,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.4" data-path="../dba/数据清理要点.html">
+        <li class="chapter " data-level="2.2.4" data-path="数据清理要点.html">
             
-                <a href="../dba/数据清理要点.html">
+                <a href="数据清理要点.html">
             
                     
                     数据清理要点
@@ -314,9 +314,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.2.4.1" data-path="../dba/futures_vnpy_tick.html">
+        <li class="chapter active" data-level="2.2.4.1" data-path="futures_vnpy_tick.html">
             
-                <a href="../dba/futures_vnpy_tick.html">
+                <a href="futures_vnpy_tick.html">
             
                     
                     期货Tick数据处理
@@ -332,7 +332,7 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.5" data-path="../dba/期货数据库.md">
+        <li class="chapter " data-level="2.2.5" data-path="期货数据库.md">
             
                 <span>
             
@@ -345,9 +345,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.6" data-path="../dba/股票数据库.html">
+        <li class="chapter " data-level="2.2.6" data-path="股票数据库.html">
             
-                <a href="../dba/股票数据库.html">
+                <a href="股票数据库.html">
             
                     
                     股票数据库
@@ -370,9 +370,9 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="vnpy.html">
+        <li class="chapter " data-level="3.1" data-path="../trading/vnpy.html">
             
-                <a href="vnpy.html">
+                <a href="../trading/vnpy.html">
             
                     
                     vnpy
@@ -383,9 +383,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.2" data-path="ctp.html">
+        <li class="chapter " data-level="3.2" data-path="../trading/ctp.html">
             
-                <a href="ctp.html">
+                <a href="../trading/ctp.html">
             
                     
                     期货
@@ -396,9 +396,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="xtp.html">
+        <li class="chapter " data-level="3.3" data-path="../trading/xtp.html">
             
-                <a href="xtp.html">
+                <a href="../trading/xtp.html">
             
                     
                     股票
@@ -439,7 +439,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >期货</a>
+        <a href=".." >期货Tick数据处理</a>
     </h1>
 </div>
 
@@ -454,8 +454,20 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2019-11-01 14:24:08
+                                <blockquote>
+<p><strong>[info] &#x671F;&#x8D27;Tick&#x6570;&#x636E;&#x5904;&#x7406;&#x9879;&#x76EE;: 166/fl/myData/vnpyRcpp</strong></p>
+<ul>
+<li>&#x9996;&#x5148;&#xFF0C;&#x4F7F;&#x7528;&#x7A0B;&#x5E8F;&#x83B7;&#x53D6;&#x6BCF;&#x65E5;&#x7684;&#x5B9E;&#x76D8; TickData&#xFF0C;&#x5E76;&#x5B58;&#x653E;&#x5230; <code>/data</code> &#x76EE;&#x5F55;</li>
+<li>&#x5176;&#x6B21;&#xFF0C;&#x5728;&#x6BCF;&#x65E5;&#x6536;&#x76D8;&#x540E;&#xFF08;15:30&#xFF09;&#xFF0C;&#x5B9A;&#x65F6;&#x6267;&#x884C;&#x5904;&#x7406;&#x811A;&#x672C;&#xFF0C;&#x6839;&#x636E;&#x4E00;&#x5B9A;&#x7684;&#x89C4;&#x5219;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x6E05;&#x6D17;</li>
+<li>&#x7531;&#x6E05;&#x6D17;&#x5B8C;&#x6210;&#x7684; Tick &#x6570;&#x636E;&#x6C47;&#x603B;&#x5F97;&#x5230; <code>mbar</code>^[minute bar, &#x5206;&#x949F;&#x6570;&#x636E;]&#x3001;<code>dbar</code>^[daily bar, &#x65E5;&#x884C;&#x60C5;&#x6570;&#x636E;]</li>
+<li>&#x540C;&#x65F6;&#xFF0C;&#x811A;&#x672C;&#x8FD8;&#x4F1A;&#x5904;&#x7406; InstrumentInfo&#xFF08;&#x5408;&#x7EA6;&#x4FE1;&#x606F;&#xFF09;&#x3001;CommissionRate&#xFF08;&#x624B;&#x7EED;&#x8D39;&#xFF09;</li>
+<li>&#x7A0B;&#x5E8F;&#x4F1A;&#x5C06;&#x884C;&#x60C5;&#x6570;&#x636E;&#x5B58;&#x653E;&#x5230;&#x6570;&#x636E;&#x5E93;</li>
+<li>&#x6700;&#x540E;&#xFF0C;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;&#x76D1;&#x63A7;&#x811A;&#x672C;&#x68C0;&#x67E5;&#x5F53;&#x65E5;&#x6570;&#x636E;&#x7684;&#x8D28;&#x91CF;&#xFF0C;&#x5982;&#x8BC6;&#x522B;&#x662F;&#x5426;&#x5F53;&#x65E5;&#x6570;&#x636E;&#x56E0;&#x7F51;&#x7EDC;&#x4E2D;&#x65AD;&#x4EA7;&#x751F;&#x65AD;&#x70B9;&#x3001;&#x6570;&#x636E;&#x83B7;&#x53D6;&#x6570;&#x91CF;&#x662F;&#x5426;&#x7B26;&#x5408;&#x7B49;&#x3002;</li>
+</ul>
+<p>@williamlfang</p>
+</blockquote>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
+2019-11-01 14:35:31
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -484,12 +496,12 @@
 
             
                 
-                <a href="vnpy.html" class="navigation navigation-prev " aria-label="Previous page: vnpy">
+                <a href="数据清理要点.html" class="navigation navigation-prev " aria-label="Previous page: 数据清理要点">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="xtp.html" class="navigation navigation-next " aria-label="Next page: 股票">
+                <a href="期货数据库.md" class="navigation navigation-next " aria-label="Next page: 期货数据库">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -500,7 +512,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"期货","level":"3.2","depth":1,"next":{"title":"股票","level":"3.3","depth":1,"path":"trading/xtp.md","ref":"trading/xtp.md","articles":[]},"previous":{"title":"vnpy","level":"3.1","depth":1,"path":"trading/vnpy.md","ref":"trading/vnpy.md","articles":[]},"dir":"neutral"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","advanced-emoji","alerts"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"alerts":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"trading/ctp.md","mtime":"2019-11-01T06:24:08.455Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-01T06:35:36.202Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"期货Tick数据处理","level":"2.2.4.1","depth":3,"next":{"title":"期货数据库","level":"2.2.5","depth":2,"path":"dba/期货数据库.md","ref":"dba/期货数据库.md","articles":[]},"previous":{"title":"数据清理要点","level":"2.2.4","depth":2,"path":"dba/数据清理要点.md","ref":"dba/数据清理要点.md","articles":[{"title":"期货Tick数据处理","level":"2.2.4.1","depth":3,"path":"dba/futures_vnpy_tick.md","ref":"dba/futures_vnpy_tick.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","copy-code-button","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","advanced-emoji","alerts"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"alerts":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"dba/futures_vnpy_tick.md","mtime":"2019-11-01T06:35:31.258Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-01T06:35:36.202Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
