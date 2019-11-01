@@ -272,7 +272,7 @@ if ( nrow( brk[deltaTime > 60*1.5] ) > 5 ) {
     smtp <- server(host = "smtp.exmail.qq.com",
                    port = 25,
                    username = "fl@hicloud-investment.com",
-                   password = "r78RXHtrfxXD2HCt")
+                   password = "***********")
     smtp(email, verbose = TRUE)
     stop( "数据有断点 !!!" )
 }
