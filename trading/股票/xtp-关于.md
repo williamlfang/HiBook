@@ -3,4 +3,10 @@
 ## 关于 XTP
 
 - [官方网站](https://xtp.zts.com.cn/)
+    {% urlembed %}
+    https://xtp.zts.com.cn/
+    {% endurlembed %}
 - [官方 Python 版本](https://github.com/ztsec/xtp_api_python)
+    {% urlembed %}
+    https://github.com/ztsec/xtp_api_python
+    {% endurlembed %}

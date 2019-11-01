@@ -48,7 +48,8 @@
                 "todo",
                 "prism", "-highlight",
                 "advanced-emoji",
-                "alerts"
+                "alerts",
+                "url-embed"
                 ],
     "pluginsConfig": {
         "github": {"url": "https://github.com/williamlfang"},
