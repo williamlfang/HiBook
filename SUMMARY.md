@@ -18,8 +18,10 @@
         * [期货Tick数据处理](dba/futures_vnpy_tick.md)
     * [金融交易日历](dba/calendar.md)
     * [期货数据库](dba/期货数据库.md)
-    * [股票数据库](dba/股票数据库.md)
-        * [股票复权因子](dba/股票复权因子.md)
+    * [股票数据库](dba/股票/数据库.md)
+        * [行情数据](db/股票/行情数据.md)
+        * [基本信息](db/股票/基本信息.md)
+        * [股票复权因子](dba/股票/复权因子.md)
 
 ## 交易系统开发
 * [vnpy](trading/vnpy.md)
