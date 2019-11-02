@@ -52,7 +52,8 @@
                 "url-embed",
                 "embed-pdf",
                 "code",
-                "latex-codecogs"
+                "latex-codecogs",
+                "include-csv"
                 ],
     "pluginsConfig": {
         "github": {"url": "https://github.com/williamlfang"},
