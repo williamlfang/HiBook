@@ -29,6 +29,7 @@
 * [期货](trading/期货/ctp.md)
     * [行情类](trading/期货/ctp_md.md)
     * [交易类](trading/期货/ctp_td.md)
+    * [cmake](trading/cmake.md)
 * [股票](trading/股票/程序化之路.md)
     * [中泰·XTP](trading/股票/xtp-关于.md)
         * [申请](trading/股票/xtp-申请.md)
