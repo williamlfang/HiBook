@@ -50,7 +50,8 @@
                 "advanced-emoji",
                 "alerts",
                 "url-embed",
-                "embed-pdf"
+                "embed-pdf",
+                "code"
                 ],
     "pluginsConfig": {
         "github": {"url": "https://github.com/williamlfang"},
@@ -72,8 +73,8 @@
             "minTocSize": 3
            },
         "tbfed-pagefooter": {
-                    "copyright":"",
-                    "modify_label": "该文件最后修改时间：",
+                    "copyright":"@william",
+                    "modify_label": "最后修改时间：",
                     "modify_format": "YYYY-MM-DD HH:mm:ss"
                 },
         "prism": {
