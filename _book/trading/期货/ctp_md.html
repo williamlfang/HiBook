@@ -830,8 +830,307 @@ public:
 
 #endif //
 </code></pre>
+<h2 id="mdcpp"><code>md.cpp</code></h2>
+<pre class="language-"><code class="lang-c++">/*
+* @Author: william
+* @Date:   2019-10-20 11:39:00
+* @Last Modified 2019-11-01
+* @Last Modified time: 2019-11-01 23:27:54
+*/
+#include &quot;md.h&quot;
+#include &quot;util.h&quot;
+
+using namespace std;
+
+// ==== &#x57FA;&#x672C;&#x7684; inline &#x51FD;&#x6570; =======================================================
+inline std::string getTimestampString(void)
+{
+    using namespace std::chrono;
+
+    // get current time
+    auto now = system_clock::now();
+
+    // get number of milliseconds for the current second / 1000
+    // get number of microseconds for the current second / 1000000
+    // (remainder after division into seconds)
+    // auto ms = duration_cast<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>milliseconds</span><span class="token punctuation">&gt;</span></span>(now.time_since_epoch()) % 1000;
+    auto ms = duration_cast<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>microseconds</span><span class="token punctuation">&gt;</span></span>(now.time_since_epoch()) % 1000000;
+
+    // convert to std::time_t in order to convert to std::tm (broken time)
+    auto timer = system_clock::to_time_t(now);
+
+    // convert to broken time
+    std::tm bt = *std::localtime(&amp;timer);
+
+    std::ostringstream oss;
+
+    oss &lt;&lt; std::put_time(&amp;bt, &quot;%Y-%m-%d %H:%M:%S&quot;); // HH:MM:SS
+    // oss &lt;&lt; &apos;.&apos; &lt;&lt; std::setfill(&apos;0&apos;) &lt;&lt; std::setw(6) &lt;&lt; ms.count();
+    oss &lt;&lt; &apos;.&apos; &lt;&lt; std::setw(6) &lt;&lt; std::setfill(&apos;0&apos;) &lt;&lt; ms.count();
+
+    return oss.str();
+}
+
+inline double cleanData( double data )
+{
+    return (data &gt; 1e100 || data &lt; 1e-100) ? 0:data;
+}
+// =========================================================================
+
+
+//==== Api &#x4E3B;&#x52A8;&#x51FD;&#x6570;&#x8C03;&#x7528; ======================================================
+// &#x521B;&#x5EFA; API
+void MdSpi::create() {
+    mkdirRecursive( (char*)this-&gt;logpath.c_str() );
+    api = CThostFtdcMdApi::CreateFtdcMdApi((char*)this-&gt;logpath.c_str());
+    api-&gt;RegisterSpi(this);
+    std::cout &lt;&lt; &quot;MdApi::Version:\t&quot; &lt;&lt; api-&gt;GetApiVersion() &lt;&lt; &apos;\n&apos; &lt;&lt; std::endl;
+    api-&gt;RegisterFront( (char*)(this-&gt;md_address).c_str() );
+}
+
+// &#x6CE8;&#x518C;&#x524D;&#x7F6E;
+void MdSpi::registerFront(std::string address) {
+    api-&gt;RegisterFront( (char*)address.c_str() );
+}
+
+// &#x542F;&#x52A8;&#x521D;&#x59CB;&#x5316;
+void MdSpi::init() {
+    api-&gt;Init();
+}
+
+// &#x8D26;&#x6237;&#x8BF7;&#x6C42;&#x767B;&#x5F55;
+void MdSpi::reqUserLogin()
+{
+
+    CThostFtdcReqUserLoginField loginReq;
+    memset(&amp;loginReq, 0, sizeof(loginReq));
+
+    strcpy(loginReq.UserID, this-&gt;userid);
+    strcpy(loginReq.BrokerID, this-&gt;brokerid);
+    strcpy(loginReq.Password, this-&gt;password);
+
+    int rt = api-&gt;ReqUserLogin(&amp;loginReq, ++reqid);
+    if (!rt) {
+        std::cout &lt;&lt; &quot;&gt;&gt;&gt;&gt;&gt;&gt;&#x53D1;&#x9001;&#x767B;&#x5F55;&#x8BF7;&#x6C42;&#x6210;&#x529F;&quot; &lt;&lt; std::endl;
+    }
+    else {
+        std::cerr &lt;&lt; &quot;---&gt;&gt;&gt;&#x53D1;&#x9001;&#x767B;&#x5F55;&#x8BF7;&#x6C42;&#x5931;&#x8D25;&quot; &lt;&lt; std::endl;
+    }
+}
+
+// &#x8D26;&#x6237;&#x8BF7;&#x6C42;&#x9000;&#x51FA;
+void MdSpi::reqUserLogout()
+{
+    CThostFtdcUserLogoutField logoutReq = CThostFtdcUserLogoutField();
+    memset(&amp;logoutReq, 0, sizeof(logoutReq));
+    strcpy(logoutReq.BrokerID, this-&gt;brokerid);
+    strcpy(logoutReq.UserID, this-&gt;userid);
+    int rt = api-&gt;ReqUserLogout(&amp;logoutReq, ++reqid);
+    if (!rt) {
+        std::cout &lt;&lt; &quot;&gt;&gt;&gt;&gt;&gt;&gt;&#x53D1;&#x9001;&#x9000;&#x51FA;&#x8BF7;&#x6C42;&#x6210;&#x529F;&quot; &lt;&lt; std::endl;
+    }
+    else {
+        std::cerr &lt;&lt; &quot;---&gt;&gt;&gt;&#x53D1;&#x9001;&#x9000;&#x51FA;&#x8BF7;&#x6C42;&#x5931;&#x8D25;&quot; &lt;&lt; std::endl;
+    }
+}
+
+inline int MdSpi::subscribe(std::string instrumentID)
+{   
+    char* buffer = (char*) instrumentID.c_str();
+    char* myreq[1] = { buffer };
+    return api-&gt;SubscribeMarketData(myreq, 1);
+}
+
+inline int MdSpi::unSubscribe(std::string instrumentID)
+{   
+    char* buffer = (char*) instrumentID.c_str();
+    char* myreq[1] = { buffer };
+    return api-&gt;SubscribeMarketData(myreq, 1);
+}
+
+inline int MdSpi::subscribeMarketData(char *ppInstrumentID[], int nCount)
+{
+    return api-&gt;SubscribeMarketData( ppInstrumentID, nCount );
+}
+
+inline int MdSpi::unSubscribeMarketData(char *ppInstrumentID[], int nCount)
+{
+    return api-&gt;UnSubscribeMarketData( ppInstrumentID, nCount );
+}
+// =============================================================================
+
+// &#x751F;&#x6210; csv &#x7684;&#x6587;&#x4EF6;&#x5934;
+void MdSpi::genHeader(std::string filePath)
+{
+    if ( !fileExists( filePath ) ) {
+        std::ofstream outFile;
+        outFile.open(filePath, std::ios::out);
+        outFile &lt;&lt; &quot;Timestamp,TradingDay,UpdateTime,ExchangeID,InstrumentID,&quot;
+                &lt;&lt; &quot;LastPrice,PreSettlementPrice,PreClosePrice,&quot; 
+                &lt;&lt; &quot;OpenPrice,HighestPrice,LowestPrice,ClosePrice,&quot;
+                &lt;&lt; &quot;UpperLimitPrice,LowerLimitPrice,SettlementPrice,&quot;
+                &lt;&lt; &quot;Volume,Turnover,&quot;
+                &lt;&lt; &quot;PreOpenInterest,OpenInterest,PreDelta,CurrDelta,&quot;
+                &lt;&lt; &quot;AskPrice1,AskVolume1,BidPrice1,BidVolume1,&quot;
+                &lt;&lt; &quot;AveragePrice&quot;
+                &lt;&lt; std::endl;
+        outFile.close();
+    }
+}
+
+// &#x4FDD;&#x5B58; csv &#x5185;&#x5BB9;
+void MdSpi::saveMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData, std::string mkdataPath)
+{
+    std::cout &lt;&lt; &quot;==== MdSpi::saveMarketData&quot; &lt;&lt; std::endl;
+    std::string timestamp = getTimestampString();
+    std::cout 
+        &lt;&lt; &quot;Timestamp:\t&quot;      &lt;&lt; timestamp &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;TradingDay:\t&quot;     &lt;&lt; pDepthMarketData-&gt;TradingDay     &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;UpdateTime:\t&quot;     &lt;&lt; pDepthMarketData-&gt;UpdateTime &lt;&lt; &quot;.&quot; &lt;&lt; pDepthMarketData-&gt;UpdateMillisec &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;ExchangeID:\t&quot;     &lt;&lt; pDepthMarketData-&gt;ExchangeID     &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;ExchangeInstID:\t&quot; &lt;&lt; pDepthMarketData-&gt;ExchangeInstID &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;InstrumentID:\t&quot;   &lt;&lt; pDepthMarketData-&gt;InstrumentID   &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;LastPrice:\t&quot;      &lt;&lt; cleanData( pDepthMarketData-&gt;LastPrice )     &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;PreSettlementPrice:\t&quot;      &lt;&lt; cleanData( pDepthMarketData-&gt;PreSettlementPrice )     &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;PreClosePrice:\t&quot;      &lt;&lt; cleanData( pDepthMarketData-&gt;PreClosePrice )     &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;OpenPrice:\t&quot;      &lt;&lt; cleanData( pDepthMarketData-&gt;OpenPrice )     &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;HighestPrice:\t&quot;   &lt;&lt; cleanData( pDepthMarketData-&gt;HighestPrice )  &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;LowestPrice:\t&quot;    &lt;&lt; cleanData( pDepthMarketData-&gt;LowestPrice )   &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;ClosePrice:\t&quot;     &lt;&lt; cleanData( pDepthMarketData-&gt;ClosePrice )    &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;UpperLimitPrice:\t&quot; &lt;&lt; cleanData( pDepthMarketData-&gt;UpperLimitPrice ) &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;LowerLimitPrice:\t&quot; &lt;&lt; cleanData( pDepthMarketData-&gt;LowerLimitPrice ) &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;SettlementPrice:\t&quot; &lt;&lt; cleanData( pDepthMarketData-&gt;SettlementPrice ) &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;Volume:\t\t&quot;       &lt;&lt; cleanData( pDepthMarketData-&gt;Volume ) &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;Turnover:\t&quot;       &lt;&lt; cleanData( pDepthMarketData-&gt;Turnover ) &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;OpenInterest:\t&quot;   &lt;&lt; cleanData( pDepthMarketData-&gt;OpenInterest ) &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;AskPrice1:\t&quot;      &lt;&lt; cleanData( pDepthMarketData-&gt;AskPrice1 ) &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;AskVolume1:\t&quot;     &lt;&lt; cleanData( pDepthMarketData-&gt;AskVolume1 ) &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;BidPrice1:\t&quot;      &lt;&lt; cleanData( pDepthMarketData-&gt;BidPrice1 ) &lt;&lt; &apos;\n&apos;
+        &lt;&lt; &quot;BidVolume1:\t&quot;     &lt;&lt; cleanData( pDepthMarketData-&gt;BidVolume1 ) &lt;&lt; &apos;\n&apos;
+        ;
+
+        // std::cout &lt;&lt; mkdataPath &lt;&lt; std::endl;
+        std::string filePath = mkdataPath + pDepthMarketData-&gt;InstrumentID + &quot;.csv&quot;;
+        // std::cout &lt;&lt; filePath &lt;&lt; std::endl;
+        std::ofstream outFile;
+        // if ( !fileExists( filePath) ) {
+        //     outFile.open(filePath, std::ios::out);
+        //     outFile &lt;&lt; &quot;Timestamp,TradingDay,UpdateTime,ExchangeID,InstrumentID,LastPrice,&quot; 
+        //             &lt;&lt; &quot;OpenPrice,HighestPrice,LowestPrice,ClosePrice,Volume,Turnover,&quot;
+        //             &lt;&lt; &quot;OpenInterest,UpperLimitPrice,LowerLimitPrice,&quot;
+        //             &lt;&lt; &quot;AskPrice1,AskVolume1,BidPrice1,BidVolume1&quot;
+        //             &lt;&lt; std::endl;
+        // } else {
+        //     outFile.open(filePath, std::ios::app); // &#x6587;&#x4EF6;&#x8FFD;&#x52A0;&#x5199;&#x5165; 
+        // }
+        outFile.open(filePath, std::ios::app); // &#x6587;&#x4EF6;&#x8FFD;&#x52A0;&#x5199;&#x5165; 
+        outFile 
+            &lt;&lt; timestamp &lt;&lt; &apos;,&apos;
+            &lt;&lt; pDepthMarketData-&gt;TradingDay &lt;&lt; &apos;,&apos;
+            &lt;&lt; pDepthMarketData-&gt;UpdateTime &lt;&lt; &apos;.&apos; &lt;&lt; pDepthMarketData-&gt;UpdateMillisec &lt;&lt; &apos;,&apos; 
+            &lt;&lt; pDepthMarketData-&gt;ExchangeID     &lt;&lt; &apos;,&apos;
+            &lt;&lt; pDepthMarketData-&gt;InstrumentID   &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;LastPrice )     &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;PreSettlementPrice )     &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;PreClosePrice )     &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;OpenPrice )     &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;HighestPrice )  &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;LowestPrice )   &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;ClosePrice )    &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;UpperLimitPrice ) &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;LowerLimitPrice ) &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;SettlementPrice ) &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;Volume ) &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;Turnover ) &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;PreOpenInterest ) &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;OpenInterest ) &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;PreDelta ) &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;CurrDelta ) &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;AskPrice1 ) &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;AskVolume1 ) &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;BidPrice1 ) &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;BidVolume1 ) &lt;&lt; &apos;,&apos;
+            &lt;&lt; cleanData( pDepthMarketData-&gt;AveragePrice ) &lt;&lt; std::endl;
+
+        outFile.close();
+}
+
+//==== Spi &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x7EE7;&#x627F; ==========================================================
+// &#x8FDE;&#x63A5;&#x6210;&#x529F;&#x5E94;&#x7B54;
+void MdSpi::OnFrontConnected()
+{
+    std::cout &lt;&lt; &quot;=====&#x5EFA;&#x7ACB;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x6210;&#x529F;=====&quot; &lt;&lt; std::endl;
+    reqUserLogin();
+}
+
+// &#x8FDE;&#x63A5;&#x6210;&#x529F;&#x5E94;&#x7B54;
+void MdSpi::OnFrontDisconnected(int nReason)
+{
+    std::cout &lt;&lt; &quot;=====&#x5EFA;&#x7ACB;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x5931;&#x8D25;=====&quot; &lt;&lt; std::endl;
+}
+
+void MdSpi::OnHeartBeatWarning(int nTimeLapse)
+{
+    std::cerr &lt;&lt; &quot;=====&#x7F51;&#x7EDC;&#x5FC3;&#x8DF3;&#x8D85;&#x65F6;=====&quot; &lt;&lt; std::endl;
+    std::cerr &lt;&lt; &quot;&#x8DDD;&#x4E0A;&#x6B21;&#x8FDE;&#x63A5;&#x65F6;&#x95F4;&#xFF1A; &quot; &lt;&lt; nTimeLapse &lt;&lt; std::endl;
+}
+
+void MdSpi::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+    bool bResult = pRspInfo &amp;&amp; (pRspInfo-&gt;ErrorID != 0);
+    if ( !bResult ) {
+        std::cout &lt;&lt; &quot;=====&#x8D26;&#x6237;&#x767B;&#x5F55;&#x6210;&#x529F;=====&quot; &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;&#x4EA4;&#x6613;&#x65E5;&#xFF1A; &quot; &lt;&lt; pRspUserLogin-&gt;TradingDay &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;&#x767B;&#x5F55;&#x65F6;&#x95F4;&#xFF1A; &quot; &lt;&lt; pRspUserLogin-&gt;LoginTime &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;&#x7ECF;&#x7EAA;&#x5546;&#xFF1A; &quot; &lt;&lt; pRspUserLogin-&gt;BrokerID &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;&#x5E10;&#x6237;&#x540D;&#xFF1A; &quot; &lt;&lt; pRspUserLogin-&gt;UserID &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;MaxOrderRef&#xFF1A; &quot; &lt;&lt; pRspUserLogin-&gt;MaxOrderRef &lt;&lt; std::endl;
+
+        login_status = true;
+        tradingday = api-&gt;GetTradingDay();
+        mkdataPath += tradingday + &quot;/&quot;;
+        mkdirRecursive( const_cast<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>char*</span><span class="token punctuation">&gt;</span></span>(mkdataPath.c_str()) );
+    } else {
+        std::cerr &lt;&lt; &quot;&#x8FD4;&#x56DE;&#x9519;&#x8BEF;---&gt;&gt;&gt; ErrorID=&quot; &lt;&lt; pRspInfo-&gt;ErrorID 
+                  &lt;&lt; &quot;, ErrorMsg=&quot; &lt;&lt; pRspInfo-&gt;ErrorMsg &lt;&lt; std::endl;
+    }
+}
+
+void MdSpi::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+    bool bResult = pRspInfo &amp;&amp; (pRspInfo-&gt;ErrorID != 0);
+    if ( !bResult ) {
+        std::cout &lt;&lt; &quot;=====&#x8D26;&#x6237;&#x767B;&#x51FA;&#x6210;&#x529F;=====&quot; &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;&#x7ECF;&#x7EAA;&#x5546;&#xFF1A; &quot; &lt;&lt; pUserLogout-&gt;BrokerID &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;&#x5E10;&#x6237;&#x540D;&#xFF1A; &quot; &lt;&lt; pUserLogout-&gt;UserID &lt;&lt; std::endl;
+    } else {
+        std::cerr &lt;&lt; &quot;&#x8FD4;&#x56DE;&#x9519;&#x8BEF;---&gt;&gt;&gt; ErrorID=&quot; &lt;&lt; pRspInfo-&gt;ErrorID &lt;&lt; &quot;, ErrorMsg=&quot; &lt;&lt; pRspInfo-&gt;ErrorMsg &lt;&lt; std::endl;
+    }
+}
+
+void MdSpi::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+    if (pRspInfo &amp;&amp; pRspInfo-&gt;ErrorID != 0)
+    {
+        std::cout &lt;&lt; &quot;ErrorID: &quot; &lt;&lt; pRspInfo-&gt;ErrorID &lt;&lt; &quot;\t&quot;
+                  &lt;&lt; &quot;ErrorMsg: &quot; &lt;&lt; gb2312_to_utf8(pRspInfo-&gt;ErrorMsg) 
+                  &lt;&lt; std::endl;
+    }
+}
+
+///&#x6DF1;&#x5EA6;&#x884C;&#x60C5;&#x901A;&#x77E5;
+void MdSpi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData)
+{
+    std::cout &lt;&lt; &quot;\n==== MdSpi::OnRtnDepthMarketData=====&quot; &lt;&lt; std::endl;
+    if (pDepthMarketData)
+    {   
+        pool-&gt;enqueue(saveMarketData, pDepthMarketData, mkdataPath);
+    }
+};
+// =============================================================================
+</code></pre>
 <footer class="page-footer"><span class="copyright">@william</span><span class="footer-modification">&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2019-11-02 11:28:56
+2019-11-02 11:33:46
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -876,7 +1175,7 @@ public:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"行情类","level":"3.1.1","depth":2,"next":{"title":"交易类","level":"3.1.2","depth":2,"path":"trading/期货/ctp_td.md","ref":"trading/期货/ctp_td.md","articles":[]},"previous":{"title":"期货","level":"3.1","depth":1,"path":"trading/期货/ctp.md","ref":"trading/期货/ctp.md","articles":[{"title":"行情类","level":"3.1.1","depth":2,"path":"trading/期货/ctp_md.md","ref":"trading/期货/ctp_md.md","articles":[]},{"title":"交易类","level":"3.1.2","depth":2,"path":"trading/期货/ctp_td.md","ref":"trading/期货/ctp_td.md","articles":[]},{"title":"cmake","level":"3.1.3","depth":2,"path":"trading/cmake.md","ref":"trading/cmake.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","advanced-emoji","alerts","url-embed","embed-pdf","copy-code-button","latex-codecogs","include-csv"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"latex-codecogs":{"type":"gif"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"include-csv":{},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"alerts":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"url-embed":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"embed-pdf":{},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"trading/期货/ctp_md.md","mtime":"2019-11-02T03:28:56.587Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-02T03:29:37.154Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"行情类","level":"3.1.1","depth":2,"next":{"title":"交易类","level":"3.1.2","depth":2,"path":"trading/期货/ctp_td.md","ref":"trading/期货/ctp_td.md","articles":[]},"previous":{"title":"期货","level":"3.1","depth":1,"path":"trading/期货/ctp.md","ref":"trading/期货/ctp.md","articles":[{"title":"行情类","level":"3.1.1","depth":2,"path":"trading/期货/ctp_md.md","ref":"trading/期货/ctp_md.md","articles":[]},{"title":"交易类","level":"3.1.2","depth":2,"path":"trading/期货/ctp_td.md","ref":"trading/期货/ctp_td.md","articles":[]},{"title":"cmake","level":"3.1.3","depth":2,"path":"trading/cmake.md","ref":"trading/cmake.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","advanced-emoji","alerts","url-embed","embed-pdf","copy-code-button","latex-codecogs","include-csv"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"latex-codecogs":{"type":"gif"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"include-csv":{},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"alerts":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"url-embed":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"embed-pdf":{},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"trading/期货/ctp_md.md","mtime":"2019-11-02T03:33:46.616Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-02T03:34:02.499Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
