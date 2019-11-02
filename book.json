@@ -51,7 +51,8 @@
                 "alerts",
                 "url-embed",
                 "embed-pdf",
-                "code"
+                "code",
+                "latex-codecogs"
                 ],
     "pluginsConfig": {
         "github": {"url": "https://github.com/williamlfang"},
@@ -73,7 +74,7 @@
             "minTocSize": 3
            },
         "tbfed-pagefooter": {
-                    "copyright":"@william",
+                    "copyright":"",
                     "modify_label": "最后修改时间：",
                     "modify_format": "YYYY-MM-DD HH:mm:ss"
                 },
