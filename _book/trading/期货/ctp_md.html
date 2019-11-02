@@ -678,8 +678,160 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="ctp-&#x884C;&#x60C5;&#x7C7B;">CTP &#x884C;&#x60C5;&#x7C7B;</h1>
+<h2 id="mdh"><code>md.h</code></h2>
+<pre class="language-"><code class="lang-c++">#ifndef __MD_H__
+#define __MD_H__
+#include &quot;util.h&quot;
+
+#include &quot;ThostFtdcMdApi.h&quot;
+
+class MdSpi : public CThostFtdcMdSpi
+{
+private:
+    // &#x5EFA;&#x7ACB; api
+    CThostFtdcMdApi *api;
+    int reqid = 1;
+
+    std::string accountid;
+    YAML::Node config = getConfig();
+
+    // userid
+    std::string _userid = getKeyValue(&quot;userid&quot;);
+    char* userid = const_cast<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>char*</span><span class="token punctuation">&gt;</span></span>(_userid.c_str());
+    // brokerid
+    std::string _brokerid = getKeyValue(&quot;brokerid&quot;);
+    char* brokerid = const_cast<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>char*</span><span class="token punctuation">&gt;</span></span>(_brokerid.c_str());
+    // password
+    std::string _password = getKeyValue(&quot;password&quot;);
+    char* password = const_cast<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>char*</span><span class="token punctuation">&gt;</span></span>(_password.c_str());
+    // authcode
+    std::string _authcode = getKeyValue(&quot;authcode&quot;);
+    char* authcode = const_cast<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>char*</span><span class="token punctuation">&gt;</span></span>(_authcode.c_str());
+    // appid
+    std::string _appid = getKeyValue(&quot;appid&quot;);
+    char* appid = const_cast<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>char*</span><span class="token punctuation">&gt;</span></span>(_appid.c_str());
+    //
+    std::string md_address = getKeyValue(&quot;md_address&quot;);
+    std::string td_address = getKeyValue(&quot;td_address&quot;);
+
+public:
+    MdSpi(std::string s): accountid( s )
+    {   
+        std::cout &lt;&lt; &quot;==== CTP&#x767B;&#x5F55;&#x8D26;&#x6237;: &quot; 
+                  &lt;&lt; this-&gt;accountid 
+                  &lt;&lt; &quot; ====&quot;
+                  &lt;&lt; std::endl;
+    };
+
+    virtual ~MdSpi()
+    {
+        // api-&gt;Join();
+        api-&gt;RegisterSpi(NULL);
+        api-&gt;Release();
+        api = NULL;
+        delete pool;
+    };
+
+    ThreadPool *pool = new ThreadPool( config[&quot;setting&quot;][&quot;no_threads&quot;].as<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>int</span><span class="token punctuation">&gt;</span></span>() );
+    //==== &#x521D;&#x59CB;&#x5316;&#x7684;&#x8BBE;&#x5B9A; ==========================================================
+    bool login_status = false;
+    std::string tradingday;
+    std::string mkdataPath = config[&quot;setting&quot;][&quot;mkdata&quot;].as<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">std:</span>:string</span><span class="token punctuation">&gt;</span></span>() + &quot;/&quot; + this-&gt;accountid + &quot;/&quot;;
+    std::string logpath = config[&quot;setting&quot;][&quot;logpath&quot;].as<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">std:</span>:string</span><span class="token punctuation">&gt;</span></span>() + &quot;/&quot; + this-&gt;accountid + &quot;/&quot;;
+
+    // &#x521B;&#x5EFA; API
+    void create();
+    // &#x6CE8;&#x518C;&#x524D;&#x7F6E;
+    void registerFront(std::string address);
+    // &#x542F;&#x52A8;&#x521D;&#x59CB;&#x5316;
+    void init();
+
+    // &#x83B7;&#x53D6;&#x4EA4;&#x6613;&#x65E5;&#x671F;
+    std::string getTradingDay()
+    {   
+        tradingday = api-&gt;GetTradingDay();
+        return tradingday;
+    }
+    // &#x63D0;&#x53D6; Key-Value
+    std::string getKeyValue( std::string key )
+    {   
+        std::string value = config[accountid][key].as<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">std:</span>:string</span><span class="token punctuation">&gt;</span></span>();
+        return value;
+    }
+    // =========================================================================
+
+
+    //==== Api &#x4E3B;&#x52A8;&#x51FD;&#x6570;&#x8C03;&#x7528; ======================================================
+    // &#x8D26;&#x6237;&#x8BF7;&#x6C42;&#x767B;&#x5F55;
+    virtual void reqUserLogin();
+    // &#x8D26;&#x6237;&#x8BF7;&#x6C42;&#x9000;&#x51FA;
+    virtual void reqUserLogout();
+    virtual int subscribe(std::string instrumentID);
+    virtual int unSubscribe(std::string instrumentID);
+    virtual int subscribeMarketData(char *ppInstrumentID[], int nCount);
+    virtual int unSubscribeMarketData(char *ppInstrumentID[], int nCount);
+
+    // &#x591A;&#x7EBF;&#x7A0B;&#x5904;&#x7406;&#x6570;&#x636E;
+    // &#x751F;&#x6210; csv &#x7684;&#x6587;&#x4EF6;&#x5934;
+    void genHeader(std::string filePath);
+    // &#x4FDD;&#x5B58; csv &#x5185;&#x5BB9;
+    static void saveMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData, std::string mkdataPath);
+    // =========================================================================
+
+
+    //==== Spi &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x7EE7;&#x627F; ======================================================
+    ///&#x5F53;&#x5BA2;&#x6237;&#x7AEF;&#x4E0E;&#x4EA4;&#x6613;&#x540E;&#x53F0;&#x5EFA;&#x7ACB;&#x8D77;&#x901A;&#x4FE1;&#x8FDE;&#x63A5;&#x65F6;&#xFF08;&#x8FD8;&#x672A;&#x767B;&#x5F55;&#x524D;&#xFF09;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x88AB;&#x8C03;&#x7528;&#x3002;
+    void OnFrontConnected();
+
+    ///&#x5F53;&#x5BA2;&#x6237;&#x7AEF;&#x4E0E;&#x4EA4;&#x6613;&#x540E;&#x53F0;&#x901A;&#x4FE1;&#x8FDE;&#x63A5;&#x65AD;&#x5F00;&#x65F6;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x88AB;&#x8C03;&#x7528;&#x3002;&#x5F53;&#x53D1;&#x751F;&#x8FD9;&#x4E2A;&#x60C5;&#x51B5;&#x540E;&#xFF0C;API&#x4F1A;&#x81EA;&#x52A8;&#x91CD;&#x65B0;&#x8FDE;&#x63A5;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x53EF;&#x4E0D;&#x505A;&#x5904;&#x7406;&#x3002;
+    ///@param nReason &#x9519;&#x8BEF;&#x539F;&#x56E0;
+    ///        0x1001 &#x7F51;&#x7EDC;&#x8BFB;&#x5931;&#x8D25;
+    ///        0x1002 &#x7F51;&#x7EDC;&#x5199;&#x5931;&#x8D25;
+    ///        0x2001 &#x63A5;&#x6536;&#x5FC3;&#x8DF3;&#x8D85;&#x65F6;
+    ///        0x2002 &#x53D1;&#x9001;&#x5FC3;&#x8DF3;&#x5931;&#x8D25;
+    ///        0x2003 &#x6536;&#x5230;&#x9519;&#x8BEF;&#x62A5;&#x6587;
+    void OnFrontDisconnected(int nReason);
+
+    ///&#x5FC3;&#x8DF3;&#x8D85;&#x65F6;&#x8B66;&#x544A;&#x3002;&#x5F53;&#x957F;&#x65F6;&#x95F4;&#x672A;&#x6536;&#x5230;&#x62A5;&#x6587;&#x65F6;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x88AB;&#x8C03;&#x7528;&#x3002;
+    ///@param nTimeLapse &#x8DDD;&#x79BB;&#x4E0A;&#x6B21;&#x63A5;&#x6536;&#x62A5;&#x6587;&#x7684;&#x65F6;&#x95F4;
+    void OnHeartBeatWarning(int nTimeLapse);
+
+    ///&#x767B;&#x5F55;&#x8BF7;&#x6C42;&#x54CD;&#x5E94;
+    virtual void OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+    ///&#x767B;&#x51FA;&#x8BF7;&#x6C42;&#x54CD;&#x5E94;
+    virtual void OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+    ///&#x8BF7;&#x6C42;&#x67E5;&#x8BE2;&#x7EC4;&#x64AD;&#x5408;&#x7EA6;&#x54CD;&#x5E94;
+    virtual void OnRspQryMulticastInstrument(CThostFtdcMulticastInstrumentField *pMulticastInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
+    ///&#x9519;&#x8BEF;&#x5E94;&#x7B54;
+    virtual void OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+    ///&#x8BA2;&#x9605;&#x884C;&#x60C5;&#x5E94;&#x7B54;
+    // virtual void OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
+    ///&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x884C;&#x60C5;&#x5E94;&#x7B54;
+    // virtual void OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
+    ///&#x8BA2;&#x9605;&#x8BE2;&#x4EF7;&#x5E94;&#x7B54;
+    // virtual void OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
+    ///&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x8BE2;&#x4EF7;&#x5E94;&#x7B54;
+    // virtual void OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
+    ///&#x6DF1;&#x5EA6;&#x884C;&#x60C5;&#x901A;&#x77E5;
+    virtual void OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData);
+
+    ///&#x8BE2;&#x4EF7;&#x901A;&#x77E5;
+    // virtual void OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp) {};
+    // =========================================================================
+};
+
+#endif //
+</code></pre>
 <footer class="page-footer"><span class="copyright">@william</span><span class="footer-modification">&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2019-11-02 11:21:06
+2019-11-02 11:28:56
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -724,7 +876,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"行情类","level":"3.1.1","depth":2,"next":{"title":"交易类","level":"3.1.2","depth":2,"path":"trading/期货/ctp_td.md","ref":"trading/期货/ctp_td.md","articles":[]},"previous":{"title":"期货","level":"3.1","depth":1,"path":"trading/期货/ctp.md","ref":"trading/期货/ctp.md","articles":[{"title":"行情类","level":"3.1.1","depth":2,"path":"trading/期货/ctp_md.md","ref":"trading/期货/ctp_md.md","articles":[]},{"title":"交易类","level":"3.1.2","depth":2,"path":"trading/期货/ctp_td.md","ref":"trading/期货/ctp_td.md","articles":[]},{"title":"cmake","level":"3.1.3","depth":2,"path":"trading/cmake.md","ref":"trading/cmake.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","advanced-emoji","alerts","url-embed","embed-pdf","copy-code-button","latex-codecogs","include-csv"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"latex-codecogs":{"type":"gif"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"include-csv":{},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"alerts":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"url-embed":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"embed-pdf":{},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"trading/期货/ctp_md.md","mtime":"2019-11-02T03:21:06.050Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-02T03:24:28.095Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"行情类","level":"3.1.1","depth":2,"next":{"title":"交易类","level":"3.1.2","depth":2,"path":"trading/期货/ctp_td.md","ref":"trading/期货/ctp_td.md","articles":[]},"previous":{"title":"期货","level":"3.1","depth":1,"path":"trading/期货/ctp.md","ref":"trading/期货/ctp.md","articles":[{"title":"行情类","level":"3.1.1","depth":2,"path":"trading/期货/ctp_md.md","ref":"trading/期货/ctp_md.md","articles":[]},{"title":"交易类","level":"3.1.2","depth":2,"path":"trading/期货/ctp_td.md","ref":"trading/期货/ctp_td.md","articles":[]},{"title":"cmake","level":"3.1.3","depth":2,"path":"trading/cmake.md","ref":"trading/cmake.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","advanced-emoji","alerts","url-embed","embed-pdf","copy-code-button","latex-codecogs","include-csv"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"latex-codecogs":{"type":"gif"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"include-csv":{},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"alerts":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"url-embed":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"embed-pdf":{},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"trading/期货/ctp_md.md","mtime":"2019-11-02T03:28:56.587Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-02T03:29:37.154Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
