@@ -50,7 +50,7 @@
                 "alerts",
                 "url-embed",
                 "embed-pdf",
-                "code",
+                "copy-code-button",
                 "latex-codecogs",
                 "include-csv"
                 ],
