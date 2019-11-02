@@ -43,6 +43,6 @@
     * [app类](trading/vnpy/app.md)
     * [strategy类](trading/vnpy/strategy.md)
     * [使用cython](trading/vnpy/cython.md)
-    * [多账户+多策略系统](trading/vnpy/trading.md)
+    * [多账户+多策略交易系统](trading/vnpy/trading.md)
     
     
