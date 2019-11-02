@@ -25,7 +25,6 @@
         * [股票复权因子](dba/股票/复权因子.md)
 
 ## 交易系统开发
-* [vnpy](trading/vnpy.md)
 * [期货](trading/期货/ctp.md)
     * [行情类](trading/期货/ctp_md.md)
     * [交易类](trading/期货/ctp_td.md)
@@ -37,3 +36,4 @@
         * [运行流程](trading/股票/xtp-运行流程.md)
     * [华鑫·Tora](trading/股票/tora.md)
     * [宽睿·Oes](trading/股票/oes.md)
+* [vnpy](trading/vnpy.md)
