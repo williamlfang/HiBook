@@ -36,4 +36,13 @@
         * [运行流程](trading/股票/xtp-运行流程.md)
     * [华鑫·Tora](trading/股票/tora.md)
     * [宽睿·Oes](trading/股票/oes.md)
-* [vnpy](trading/vnpy.md)
+* [vnpy](trading/vnpy/about.md)
+    * [封装C++接口](trading/vnpy/cpp.md)
+    * [gateway类](trading/vnpy/gateway.md)
+    * [engine类](trading/vnpy/engine.md)
+    * [app类](trading/vnpy/app.md)
+    * [strategy类](trading/vnpy/strategy.md)
+    * [使用cython](trading/vnpy/cython.md)
+    * [多账户+多策略系统](trading/vnpy/trading.md)
+    
+    
