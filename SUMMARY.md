@@ -2,7 +2,7 @@
 * [关于](README.md)
 
 ## 服务器运维
-* [CentOS7 操作系统]
+* CentOS7 操作系统
     * [安装与配置](os/centos/centos7.md)
     * [LLVM 扩展逻辑磁盘](os/centos/LLVM 扩展逻辑磁盘.md)
     * [内网穿透](os/frp.md)
@@ -11,7 +11,7 @@
     * [命令行启动 TeamViewer](os/命令行启动 TeamViewer.md)
     * [sshfs 挂载远程服务器](os/sshfs 挂载远程服务器.md)
     * [邮件系统](os/hicloud_exmail.md)
-* [MySQL 数据库]
+* MySQL 数据库
     * [修改数据存储目录](dba/mysql/datapath.md)
     * [建立数据库命令](dba/mysql/database.md)
     * [数据库运维操作](dba/mysql/operation.md)
