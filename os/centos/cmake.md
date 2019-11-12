@@ -8,4 +8,5 @@ cd cmake-3.15.4
 make -j$(nproc) && make install
 
 cmake --version
-```bash
+```
+
