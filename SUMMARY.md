@@ -7,6 +7,7 @@
     * [LLVM 扩展逻辑磁盘](os/centos/LLVM 扩展逻辑磁盘.md)
     * [内网穿透](os/frp.md)
     * [升级gcc](os/centos/gcc.md)
+    * [源代码编译升级gcc](os/centos/gcc-source.md)
     * [命令行设置分辨率](os/centos/CentOS7命令行设置分辨率.md)
     * [命令行启动 TeamViewer](os/命令行启动 TeamViewer.md)
     * [sshfs 挂载远程服务器](os/sshfs 挂载远程服务器.md)
