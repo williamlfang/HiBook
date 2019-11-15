@@ -11,6 +11,7 @@
     * [命令行设置分辨率](os/centos/CentOS7命令行设置分辨率.md)
     * [命令行启动 TeamViewer](os/命令行启动 TeamViewer.md)
     * [源代码安装 cmake](os/centos/cmake.md)
+    × [无网环境手撕 MySQL](os/centos/mysql-offline.md)
     * [sshfs 挂载远程服务器](os/sshfs 挂载远程服务器.md)
     * [邮件系统](os/hicloud_exmail.md)
 * MySQL 数据库
