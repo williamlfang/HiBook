@@ -160,3 +160,12 @@ locate libmysql
 export LD_LIBRARY_PATH=/usr/lib64/mysql:$LD_LIBRARY_PATH
 ```
 
+```bash
+[trader@localhost ~]$ python
+Python 3.7.1 (default, Dec 14 2018, 19:28:38)
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import MySQLdb
+>>>
+```
+
