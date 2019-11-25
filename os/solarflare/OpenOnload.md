@@ -1,4 +1,6 @@
-# 下载驱动
+# 初探
+
+##下载驱动
 
 `OpenOnload` 原先是作为一个独立的开发项目存在，在[官网](https://www.openonload.org/download.html)可以获取相关的资讯，或者直接进入[下载网页](https://www.openonload.org/download/)获取指定版本的驱动。
 
@@ -102,5 +104,76 @@ openonload-201811-u1.tgz                           02-Jul-2019 10:53            
 openonload-201811-u1.tgz.md5                       02-Jul-2019 10:53                  59
 openonload-201811.tgz                              03-Dec-2018 23:39             4951381
 openonload-201811.tgz.md5                          03-Dec-2018 23:39                  56
+```
+
+## demo
+
+所有运行的demo都在我们事先下载得到的压缩包里面。一般来说
+
+- files under the `gnu` directory are 32-bit (if these are built)
+- files under the `gnu_x86_64` directory are 64-bit.
+
+我们进入 `gnu_x86_64` 的文件夹即可。
+
+```bash
+## 进入相应的文件夹
+cd openonload-201811/
+
+## 源代码存放
+cd scripts/
+## 增加环境路径
+export PATH="$PWD:$PATH"
+## 使用 64 位进行编译
+cd ../build/gnu_x86_64/tests/ef_vi/
+## 先清理，然后安装
+make clean && make
+
+pwd
+/root/openonload-201811/build/gnu_x86_64/tests/ef_vi
+
+ls -alh
+
+total 5304
+-rw-r--r--. 1 root root      1 Nov 17 03:53 copy.depends
+-rw-r--r--. 1 root root      0 Nov 17 03:53 copy.done
+-rwxr-xr-x. 1 root root 343784 Nov 25 04:24 efforward
+-rw-r--r--. 1 root root   2724 Nov 25 04:24 efforward.d
+-rw-r--r--. 1 root root  79712 Nov 25 04:24 efforward.o
+-rwxr-xr-x. 1 root root 387320 Nov 25 04:24 efforward_packed
+-rw-r--r--. 1 root root   2745 Nov 25 04:24 efforward_packed.d
+-rw-r--r--. 1 root root  86952 Nov 25 04:24 efforward_packed.o
+-rwxr-xr-x. 1 root root 368680 Nov 25 04:24 efjumborx
+-rw-r--r--. 1 root root   2670 Nov 25 04:24 efjumborx.d
+-rw-r--r--. 1 root root  80384 Nov 25 04:24 efjumborx.o
+-rwxr-xr-x. 1 root root 465904 Nov 25 04:24 eflatency
+-rw-r--r--. 1 root root   5631 Nov 25 04:24 eflatency.d
+-rw-r--r--. 1 root root 121064 Nov 25 04:24 eflatency.o
+-rwxr-xr-x. 1 root root 326256 Nov 25 04:24 efrss
+-rw-r--r--. 1 root root   2658 Nov 25 04:24 efrss.d
+-rw-r--r--. 1 root root  67640 Nov 25 04:24 efrss.o
+-rwxr-xr-x. 1 root root 421928 Nov 25 04:24 efsend
+-rw-r--r--. 1 root root   5366 Nov 25 04:24 efsend_common.d
+-rw-r--r--. 1 root root  33168 Nov 25 04:24 efsend_common.o
+-rw-r--r--. 1 root root   5437 Nov 25 04:24 efsend.d
+-rw-r--r--. 1 root root  51224 Nov 25 04:24 efsend.o
+-rwxr-xr-x. 1 root root 427032 Nov 25 04:24 efsend_pio
+-rw-r--r--. 1 root root   5446 Nov 25 04:24 efsend_pio.d
+-rw-r--r--. 1 root root  45840 Nov 25 04:24 efsend_pio.o
+-rwxr-xr-x. 1 root root 435640 Nov 25 04:24 efsend_pio_warm
+-rw-r--r--. 1 root root   5563 Nov 25 04:24 efsend_pio_warm.d
+-rw-r--r--. 1 root root  63160 Nov 25 04:24 efsend_pio_warm.o
+-rwxr-xr-x. 1 root root 409200 Nov 25 04:24 efsend_timestamping
+-rw-r--r--. 1 root root   5476 Nov 25 04:24 efsend_timestamping.d
+-rw-r--r--. 1 root root  43816 Nov 25 04:24 efsend_timestamping.o
+-rwxr-xr-x. 1 root root 410640 Nov 25 04:24 efsink
+-rw-r--r--. 1 root root   2733 Nov 25 04:24 efsink.d
+-rw-r--r--. 1 root root  97664 Nov 25 04:24 efsink.o
+-rwxr-xr-x. 1 root root 369440 Nov 25 04:24 efsink_packed
+-rw-r--r--. 1 root root   2736 Nov 25 04:24 efsink_packed.d
+-rw-r--r--. 1 root root  65952 Nov 25 04:24 efsink_packed.o
+-rw-r--r--. 1 root root    150 Nov 17 03:53 GNUmakefile
+-rwxr-xr-x. 1 root root   5220 Nov 25 04:24 stats
+-rw-r--r--. 1 root root   2623 Nov 25 04:24 utils.d
+-rw-r--r--. 1 root root  79648 Nov 25 04:24 utils.o
 ```
 
