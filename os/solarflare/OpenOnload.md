@@ -177,3 +177,7 @@ total 5304
 -rw-r--r--. 1 root root  79648 Nov 25 04:24 utils.o
 ```
 
+## 主要应用
+
+![](/home/william/Documents/hibook/os/solarflare/ef_apps.png)
+
