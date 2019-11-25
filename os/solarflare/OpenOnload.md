@@ -179,5 +179,5 @@ total 5304
 
 ## 主要应用
 
-![](/home/william/Documents/hibook/os/solarflare/ef_apps.png)
+![](./ef_apps.png)
 
