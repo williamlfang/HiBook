@@ -15,6 +15,7 @@
     * [无网环境手撕 MySQL](os/centos/mysql-offline.md)
     * [sshfs 挂载远程服务器](os/sshfs 挂载远程服务器.md)
     * [邮件系统](os/hicloud_exmail.md)
+    * [安装工具套件:tmux-zsh-autojump](os/tmux-zsh-autojump.md)
 * Solarflare 开发
     * [OpenOnload](os/solarflare/OpenOnload.md)
 * MySQL 数据库
