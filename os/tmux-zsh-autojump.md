@@ -414,8 +414,35 @@ setw -g monitor-activity on
 
 ## 鼠标设置，不要打开，不然用鼠标选择不了内容
 set-option -g mouse on
+```
 
+接着，我们需要安装底部状态栏支持插件 `tmux-powerline`
 
+```bash
+mkidr -p $HOME/opt
+cd $HOME/opt
+mkdir -p .tmux
+cd .tmux
+git clone https://github.com/erikw/tmux-powerline.git 
+
+echo '
+## =============================================================================
+## https://github.com/erikw/tmux-powerline
+set-option -g status on
+set-option -g status-interval 2
+set-option -g status-justify "centre"
+set-option -g status-left-length 60
+set-option -g status-right-length 150
+set-option -g status-left "#(~/opt/.tmux/tmux-powerline/powerline.sh left)"
+set-option -g status-right "#(~/opt/.tmux/tmux-powerline/powerline.sh right)"
+set-window-option -g window-status-current-format "#[fg=colour235, bg=colour27]⮀#[fg=colour255, bg=colour27] #I ⮁ #W #[fg=colour27, bg=colour235]⮀"
+## =============================================================================
+' >> $HOME/.tmux.conf
+```
+
+然后在 `~/.tmux.conf` 添加如下
+
+```bash
 ## =============================================================================
 ## https://github.com/erikw/tmux-powerline
 set-option -g status on
@@ -514,6 +541,7 @@ run-shell ~/Documents/tmux-resurrect/resurrect.tmux
 set -g pane-border-status bottom
 set -g pane-border-format "#P #T #{pane_current_command}"
 ```
+
 
 ### 屏幕右边显示命令执行时间
 
