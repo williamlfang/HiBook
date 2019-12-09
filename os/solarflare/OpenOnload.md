@@ -106,6 +106,52 @@ openonload-201811.tgz                              03-Dec-2018 23:39            
 openonload-201811.tgz.md5                          03-Dec-2018 23:39                  56
 ```
 
+## 安装
+
+
+```bash
+## 进入相应的文件夹
+cd openonload-201811/
+
+## 源代码存放
+cd scripts/
+ll
+total 240K
+drwxr-xr-x. 6 fl fl 4.0K Dec  3  2018 .
+drwxr-xr-x. 7 fl fl  243 Dec  9 03:39 ..
+-rwxr-xr-x. 1 fl fl  154 Apr 12  2018 check_binary_presence
+-rwxr-xr-x. 1 fl fl  329 Apr 12  2018 check_header_presence
+-rwxr-xr-x. 1 fl fl  358 Apr 12  2018 check_library_presence
+-rwxr-xr-x. 1 fl fl  573 Apr 12  2018 check_prototype
+-rwxr-xr-x. 1 fl fl 2.2K Nov  8  2018 libc_compat.sh
+-rwxr-xr-x. 1 fl fl 1.4K Apr 12  2018 mmake
+-rwxr-xr-x. 1 fl fl  16K Nov  8  2018 mmakebuildtree
+-rwxr-xr-x. 1 fl fl  15K Nov  8  2018 mmaketool
+-rwxr-xr-x. 1 fl fl  13K Nov  9  2018 onload
+drwxr-xr-x. 2 fl fl   75 Oct 26  2018 onload_apps
+-rwxr-xr-x. 1 fl fl 6.0K Nov  8  2018 onload_build
+-rwxr-xr-x. 1 fl fl  27K Dec  3  2018 onload_install
+-rwxr-xr-x. 1 fl fl  19K Jul 16  2018 onload_iptables
+-rwxr-xr-x. 1 fl fl 8.2K Nov  8  2018 onload_metrics
+drwxr-xr-x. 2 fl fl 4.0K Dec  3  2018 onload_misc
+drwxr-xr-x. 2 fl fl 4.0K Nov  9  2018 onload_profiles
+-rwxr-xr-x. 1 fl fl 2.2K Jul 16  2018 onload_rpmtest
+-rwxr-xr-x. 1 fl fl 3.3K Nov  8  2018 onload_tcpdump
+-rwxr-xr-x. 1 fl fl 8.0K Nov  9  2018 onload_tool
+-rwxr-xr-x. 1 fl fl  748 Apr 12  2018 sfcaffinity
+-rwxr-xr-x. 1 fl fl  30K Apr 12  2018 sfcaffinity_config
+-rw-r--r--. 1 fl fl  15K Apr 12  2018 sfcaffinity.py
+-rwxr-xr-x. 1 fl fl 6.5K Apr 12  2018 sfcirqaffinity
+-rw-r--r--. 1 fl fl 4.6K Apr 12  2018 sfcmask.py
+drwxr-xr-x. 2 fl fl  108 Dec  3  2018 sh
+-rwxr-xr-x. 1 fl fl 1.1K Apr 12  2018 zf_debug
+
+## 搭建环境
+./onload_build
+## 执行安装
+./onload_install
+```
+
 ## demo
 
 所有运行的demo都在我们事先下载得到的压缩包里面。一般来说
@@ -116,11 +162,6 @@ openonload-201811.tgz.md5                          03-Dec-2018 23:39            
 我们进入 `gnu_x86_64` 的文件夹即可。
 
 ```bash
-## 进入相应的文件夹
-cd openonload-201811/
-
-## 源代码存放
-cd scripts/
 ## 增加环境路径
 export PATH="$PWD:$PATH"
 ## 使用 64 位进行编译

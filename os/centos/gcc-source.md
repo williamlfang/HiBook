@@ -53,3 +53,18 @@ export PATH=/home/trader/opt/bin:$PATH
 export LD_LIBRARY_PATH=/home/trader/opt/lib:/usr/lib:$LD_LIBRARY_PATH
 ```
 
+如果使用 `root` 权限进行安装，也可以设置全局参数
+
+```bash
+# 环境变量path
+echo  "export PATH=/usr/local/gcc/bin:$PATH" >> /etc/profile.d/gcc.sh
+source /etc/profile.d/gcc.sh
+
+# 头文件
+ln -sv /usr/local/gcc/include/ /usr/include/gcc
+
+# 库文件
+echo "/usr/local/gcc/lib64" >> /etc/ld.so.conf.d/gcc.conf
+ldconfig -v
+ldconfig -p |grep gcc
+```
