@@ -36,6 +36,9 @@ ln -s mpfr-3.1.4 mpfr
 ln -s mpc-1.0.3 mpc
 
 ## 开始编译，由于不是 root, 需要通过 --prefix 指定路径
+## 如果拥有 root 权限
+## ./configure --prefix=/usr/local/gcc  --enable-bootstrap  --enable-checking=release --enable-languages=c,c++ --disable-multilib
+## 如果没有 root 权限，需要安装到用户目录
 ./configure --disable-multilib --prefix=/home/trader/opt
 
 ## 开始安装，不要用 -j，可能会导致错误
