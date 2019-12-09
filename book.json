@@ -52,8 +52,7 @@
                 "embed-pdf",
                 "copy-code-button",
                 "latex-codecogs",
-                "include-csv",
-                "popup"
+                "include-csv"
                 ],
     "pluginsConfig": {
         "github": {"url": "https://github.com/williamlfang"},
