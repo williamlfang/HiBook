@@ -1,5 +1,7 @@
 # 初探
 
+厂商的MAC地址前四位是00:0F，以此判断哪个网卡为Solarflare的网卡。
+
 ##下载驱动
 
 `OpenOnload` 原先是作为一个独立的开发项目存在，在[官网](https://www.openonload.org/download.html)可以获取相关的资讯，或者直接进入[下载网页](https://www.openonload.org/download/)获取指定版本的驱动。
