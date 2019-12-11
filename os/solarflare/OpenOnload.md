@@ -154,6 +154,22 @@ drwxr-xr-x. 2 fl fl  108 Dec  3  2018 sh
 onload_tool reload
 ```
 
+## 卸载
+
+```bash
+#unload onload
+onload_tool unload
+#remove sfc
+modprobe –r sfc
+#if found any sfc rpm, then remove them
+rpm -qa | grep sfc
+rpm -e *sfc*.rpm
+#unintall onload
+onload_uninstall
+```
+
+
+
 ## demo
 
 所有运行的demo都在我们事先下载得到的压缩包里面。一般来说
@@ -226,5 +242,230 @@ total 5304
 
 ## 测试
 
+### 服务器与客户端
+
 ![](./ef_latency_eg.png)
 
+### 延时测试
+
+要求：
+
+- 两台机器都配备 Solarflare 网络适配器
+- 两台机器使用一根光纤线连接 Solarflare 接口
+- 分别为两块卡上的 Solarflare 接口配置一个 IP 地址， 使得它们之间可以通讯，使用 ping 命令验证连接
+- OpenOnload 都分别安装到两台机器上
+- Solarflare 的 sfnettest 和 **NetPerf** 都分别安装到两台机器上
+
+软件安装：
+
+- 安装 openonload
+
+    ```bash
+    ## 进入相应的文件夹
+    cd openonload-201811/
+
+    ## 源代码存放
+    cd scripts/
+
+    ## 搭建环境
+    ./onload_build
+    ## 执行安装
+    ./onload_install
+    #加载 onload
+    onload_tool reload
+    ```
+
+  
+
+- 安装 Netperf
+
+    ```bash
+    wget http://repo.iotti.biz/CentOS/7/x86_64/netperf-2.7.0-1.el7.lux.x86_64.rpm
+    rpm -i netperf-2.7.0-1.el7.lux.x86_64.rpm
+    ```
+
+
+
+- 安装 sfnettest
+
+    ```bash
+    wget https://www.openonload.org/download/sfnettest/sfnettest-1.5.0.tgz
+    tar xvf sfnettest-1.5.0.tgz
+    cd sfnettest-1.5.0/src
+    make
+    ```
+
+- 调优设置
+
+    ```bash
+    ## 停止 cpuspeed 服务以避免进入省电模式，降低CPU时钟速度
+    systemctl stop cpuspeed
+
+    ## 停止 irqbalance 服务器以防止 OS 在可用的CPU内核之间重新平衡中断
+    systemctl stop irqbalance
+
+    ## 停止防火墙辐射器以消除简介消耗
+    systemctl stop firewalld
+
+    ## 禁用 interrupt moderation
+    ethtool -C enp1s0f1 rx-usecs-irq 0 adaptive-rx off
+
+    ## 启动低延时配置：tuned-adm
+    tuned-adm list
+    tuned-adm profile network-latency
+
+    ## 防止系统进入 CPU 低功耗模式　cstates
+    ```
+
+- sfnettest 延时测试
+
+  - 首先，在服务器开启
+
+    ```bash
+    onload --profile=latency taskset -c 1 ./sfnt-pingpong --maxms=10000 --affinity 1,1
+    ```
+
+    运行成功后等待客户端接入
+
+    ```bash
+    oo:sfnt-pingpong[17337]: Using OpenOnload 201811 Copyright 2006-2018 Solarflare Communications, 2002-2005 Level 5 Networks [2]
+    sfnt-pingpong: server: waiting for client to connect...
+    ```
+
+  - TCP 测试
+
+    ```bash
+    onload --profile=latency taskset -c 1 ./sfnt-pingpong --maxms=10000 --affinity 1,1 tcp 127.0.0.1
+    ```
+
+    运行结果如下
+
+    ```bash
+    oo:sfnt-pingpong[17093]: Using OpenOnload 201811 Copyright 2006-2018 Solarflare Communications, 2002-2005 Level 5 Networks [4]
+    # cmdline: ./sfnt-pingpong --maxms=10000 --affinity 1,1 tcp 127.0.0.1
+    # version: 1.5.0
+    # src: 8dc3b027d85b28bedf9fd731362e4968
+    # date: Wed Dec 11 02:19:49 EST 2019
+    # uname: Linux localhost.localdomain 3.10.0-1062.4.1.el7.x86_64 #1 SMP Fri Oct 18 17:15:30 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+    # cpu: model name	: Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz
+    # lspci: 01:00.0 Ethernet controller: Solarflare Communications SFC9120 10G Ethernet Controller (rev 01)
+    # lspci: 01:00.1 Ethernet controller: Solarflare Communications SFC9120 10G Ethernet Controller (rev 01)
+    # lspci: 05:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller (rev 15)
+    # enp1s0f0: driver: sfc
+    # enp1s0f0: version: 4.15.0.1012
+    # enp1s0f0: bus-info: 0000:01:00.0
+    # enp1s0f1: driver: sfc
+    # enp1s0f1: version: 4.15.0.1012
+    # enp1s0f1: bus-info: 0000:01:00.1
+    # enp5s0: driver: r8169
+    # enp5s0: version: 
+    # enp5s0: bus-info: 0000:05:00.0
+    # virbr0: driver: bridge
+    # virbr0: version: 2.3
+    # virbr0: bus-info: N/A
+    # virbr0-nic: driver: tun
+    # virbr0-nic: version: 1.6
+    # virbr0-nic: bus-info: tap
+    # ram: MemTotal:        7872940 kB
+    # tsc_hz: 2999998960
+    # LD_PRELOAD=libonload.so
+    # onload_version=201811
+    # EF_TCP_FASTSTART_INIT=0
+    # EF_POLL_USEC=100000
+    # EF_TCP_FASTSTART_IDLE=0
+    # server LD_PRELOAD=libonload.so
+    # percentile=99
+    #
+    #	size	mean	min	median	max	%ile	stddev	iter
+    	1	7668	6472	7556	35283	8855	522	650000
+    	2	7064	6133	7010	257486	8064	469	705000
+    	4	6964	6123	6982	16029	7967	369	716000
+    	8	6915	6093	6911	16987	7923	401	721000
+    	16	6904	6113	6866	22018	7916	403	722000
+    	32	6888	6118	6827	15773	7875	384	723000
+    	64	6880	6114	6820	16818	7862	390	724000
+    	128	6895	6172	6833	14807	7890	397	723000
+    	256	6909	6122	6850	20069	7911	391	721000
+    	512	6861	6118	6805	308711	7840	527	726000
+    	1024	6869	6139	6806	27147	7875	407	725000
+    	2048	7124	6391	7064	19685	8141	412	699000
+    	4096	7397	6523	7357	20114	8455	437	674000
+    	8192	7675	6839	7612	19902	8757	432	649000
+    	16384	8481	7628	8417	17966	9577	412	588000
+    	32768	10136	9162	10063	19106	11376	477	492000
+    	65536	20403	18129	20392	41106	22849	1070	245000
+    ```
+
+    测试结果按照发送数据包大小进行排列，输出结果为 RTT(round-trip-time)/2的平均延时时间，单位(ns)，并且列出了最小值、中位数、最大值、百分位以及标准差。比如一个 `32` 字节的数据包
+
+    ```bash
+    #	size	mean	min	median	max	%ile	stddev	iter
+    	32	6888	6118	6827	15773	7875	384	723000
+    ```
+
+    - 平均延时为 6.888us
+    - 最快延时 6.118us
+    - 最长延时 7.875us
+    - 标准差为 0.364us 
+
+  - UDP 测试
+
+    ```bash
+    oo:sfnt-pingpong[17576]: Using OpenOnload 201811 Copyright 2006-2018 Solarflare Communications, 2002-2005 Level 5 Networks [6]
+    # cmdline: ./sfnt-pingpong --maxms=10000 --affinity 1,1 udp 127.0.0.1
+    # version: 1.5.0
+    # src: 8dc3b027d85b28bedf9fd731362e4968
+    # date: Wed Dec 11 02:27:16 EST 2019
+    # uname: Linux localhost.localdomain 3.10.0-1062.4.1.el7.x86_64 #1 SMP Fri Oct 18 17:15:30 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+    # cpu: model name   : Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz
+    # lspci: 01:00.0 Ethernet controller: Solarflare Communications SFC9120 10G Ethernet Controller (rev 01)
+    # lspci: 01:00.1 Ethernet controller: Solarflare Communications SFC9120 10G Ethernet Controller (rev 01)
+    # lspci: 05:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller (rev 15)
+    # enp1s0f0: driver: sfc
+    # enp1s0f0: version: 4.15.0.1012
+    # enp1s0f0: bus-info: 0000:01:00.0
+    # enp1s0f1: driver: sfc
+    # enp1s0f1: version: 4.15.0.1012
+    # enp1s0f1: bus-info: 0000:01:00.1
+    # enp5s0: driver: r8169
+    # enp5s0: version: 
+    # enp5s0: bus-info: 0000:05:00.0
+    # virbr0: driver: bridge
+    # virbr0: version: 2.3
+    # virbr0: bus-info: N/A
+    # virbr0-nic: driver: tun
+    # virbr0-nic: version: 1.6
+    # virbr0-nic: bus-info: tap
+    # ram: MemTotal:        7872940 kB
+    # tsc_hz: 2999999520
+    # LD_PRELOAD=libonload.so
+    # onload_version=201811
+    # EF_TCP_FASTSTART_INIT=0
+    # EF_POLL_USEC=100000
+    # EF_TCP_FASTSTART_IDLE=0
+    # server LD_PRELOAD=libonload.so
+    # percentile=99
+    #
+    #   size    mean    min median  max %ile    stddev  iter
+        0   6216    5434    6120    27259   7171    452 800000
+        1   5929    5424    5892    24829   6764    310 839000
+        2   5841    5272    5844    19435   6659    289 852000
+        4   5809    5261    5798    14376   6647    349 857000
+        8   5793    5232    5776    15298   6636    354 859000
+        16  5746    5248    5715    13638   6570    349 866000
+        32  5762    5255    5735    141833  6587    382 864000
+        64  5716    5246    5686    20291   6553    367 871000
+        128 5697    5231    5663    14968   6526    356 874000
+        256 5692    5212    5665    368520  6528    528 874000
+        512 5687    5251    5654    17424   6486    330 875000
+        1024    5788    5307    5748    13709   6590    336 860000
+        1472    5824    5341    5788    13610   6634    343 854000
+        1473    5827    5333    5793    21815   6637    343 854000
+        2048    5895    5449    5868    17404   6696    304 844000
+        4096    6091    5566    6055    17905   6951    377 817000
+        8192    6737    6056    6719    27552   7744    422 739000
+        16384   7414    6852    7359    250894  8421    506 672000
+        32768   8869    8177    8785    22277   10025   440 562000
+    ```
+
+    

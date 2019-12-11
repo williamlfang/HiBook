@@ -93,6 +93,8 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="参考链接.html" />
+    
     
 
     </head>
@@ -358,6 +360,19 @@
             
                     
                     OpenOnload
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="参考链接.html">
+            
+                <a href="参考链接.html">
+            
+                    
+                    参考链接
             
                 </a>
             
@@ -1014,6 +1029,17 @@ drwxr-xr-x. <span class="token number">2</span> fl fl  <span class="token number
 <span class="token comment">#&#x52A0;&#x8F7D; onload</span>
 onload_tool reload
 </code></pre>
+<h2 id="&#x5378;&#x8F7D;">&#x5378;&#x8F7D;</h2>
+<pre class="language-"><code class="lang-bash"><span class="token comment">#unload onload</span>
+onload_tool unload
+<span class="token comment">#remove sfc</span>
+modprobe &#x2013;r sfc
+<span class="token comment">#if found any sfc rpm, then remove them</span>
+<span class="token function">rpm</span> -qa <span class="token operator">|</span> <span class="token function">grep</span> sfc
+<span class="token function">rpm</span> -e *sfc*.rpm
+<span class="token comment">#unintall onload</span>
+onload_uninstall
+</code></pre>
 <h2 id="demo">demo</h2>
 <p>&#x6240;&#x6709;&#x8FD0;&#x884C;&#x7684;demo&#x90FD;&#x5728;&#x6211;&#x4EEC;&#x4E8B;&#x5148;&#x4E0B;&#x8F7D;&#x5F97;&#x5230;&#x7684;&#x538B;&#x7F29;&#x5305;&#x91CC;&#x9762;&#x3002;&#x4E00;&#x822C;&#x6765;&#x8BF4;</p>
 <ul>
@@ -1079,9 +1105,212 @@ total <span class="token number">5304</span>
 <h2 id="&#x4E3B;&#x8981;&#x5E94;&#x7528;">&#x4E3B;&#x8981;&#x5E94;&#x7528;</h2>
 <p><img src="ef_apps.png" alt=""></p>
 <h2 id="&#x6D4B;&#x8BD5;">&#x6D4B;&#x8BD5;</h2>
+<h3 id="&#x670D;&#x52A1;&#x5668;&#x4E0E;&#x5BA2;&#x6237;&#x7AEF;">&#x670D;&#x52A1;&#x5668;&#x4E0E;&#x5BA2;&#x6237;&#x7AEF;</h3>
 <p><img src="ef_latency_eg.png" alt=""></p>
+<h3 id="&#x5EF6;&#x65F6;&#x6D4B;&#x8BD5;">&#x5EF6;&#x65F6;&#x6D4B;&#x8BD5;</h3>
+<p>&#x8981;&#x6C42;&#xFF1A;</p>
+<ul>
+<li>&#x4E24;&#x53F0;&#x673A;&#x5668;&#x90FD;&#x914D;&#x5907; Solarflare &#x7F51;&#x7EDC;&#x9002;&#x914D;&#x5668;</li>
+<li>&#x4E24;&#x53F0;&#x673A;&#x5668;&#x4F7F;&#x7528;&#x4E00;&#x6839;&#x5149;&#x7EA4;&#x7EBF;&#x8FDE;&#x63A5; Solarflare &#x63A5;&#x53E3;</li>
+<li>&#x5206;&#x522B;&#x4E3A;&#x4E24;&#x5757;&#x5361;&#x4E0A;&#x7684; Solarflare &#x63A5;&#x53E3;&#x914D;&#x7F6E;&#x4E00;&#x4E2A; IP &#x5730;&#x5740;&#xFF0C; &#x4F7F;&#x5F97;&#x5B83;&#x4EEC;&#x4E4B;&#x95F4;&#x53EF;&#x4EE5;&#x901A;&#x8BAF;&#xFF0C;&#x4F7F;&#x7528; ping &#x547D;&#x4EE4;&#x9A8C;&#x8BC1;&#x8FDE;&#x63A5;</li>
+<li>OpenOnload &#x90FD;&#x5206;&#x522B;&#x5B89;&#x88C5;&#x5230;&#x4E24;&#x53F0;&#x673A;&#x5668;&#x4E0A;</li>
+<li>Solarflare &#x7684; sfnettest &#x548C; <strong>NetPerf</strong> &#x90FD;&#x5206;&#x522B;&#x5B89;&#x88C5;&#x5230;&#x4E24;&#x53F0;&#x673A;&#x5668;&#x4E0A;</li>
+</ul>
+<p>&#x8F6F;&#x4EF6;&#x5B89;&#x88C5;&#xFF1A;</p>
+<ul>
+<li><p>&#x5B89;&#x88C5; openonload</p>
+<pre class="language-"><code class="lang-bash">  <span class="token comment">## &#x8FDB;&#x5165;&#x76F8;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x5939;</span>
+  <span class="token builtin class-name">cd</span> openonload-201811/
+
+  <span class="token comment">## &#x6E90;&#x4EE3;&#x7801;&#x5B58;&#x653E;</span>
+  <span class="token builtin class-name">cd</span> scripts/
+
+  <span class="token comment">## &#x642D;&#x5EFA;&#x73AF;&#x5883;</span>
+  ./onload_build
+  <span class="token comment">## &#x6267;&#x884C;&#x5B89;&#x88C5;</span>
+  ./onload_install
+  <span class="token comment">#&#x52A0;&#x8F7D; onload</span>
+  onload_tool reload
+</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>&#x5B89;&#x88C5; Netperf</p>
+<pre class="language-"><code class="lang-bash">  <span class="token function">wget</span> http://repo.iotti.biz/CentOS/7/x86_64/netperf-2.7.0-1.el7.lux.x86_64.rpm
+  <span class="token function">rpm</span> -i netperf-2.7.0-1.el7.lux.x86_64.rpm
+</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>&#x5B89;&#x88C5; sfnettest</p>
+<pre class="language-"><code class="lang-bash">  <span class="token function">wget</span> https://www.openonload.org/download/sfnettest/sfnettest-1.5.0.tgz
+  <span class="token function">tar</span> xvf sfnettest-1.5.0.tgz
+  <span class="token builtin class-name">cd</span> sfnettest-1.5.0/src
+  <span class="token function">make</span>
+</code></pre>
+</li>
+<li><p>&#x8C03;&#x4F18;&#x8BBE;&#x7F6E;</p>
+<pre class="language-"><code class="lang-bash">  <span class="token comment">## &#x505C;&#x6B62; cpuspeed &#x670D;&#x52A1;&#x4EE5;&#x907F;&#x514D;&#x8FDB;&#x5165;&#x7701;&#x7535;&#x6A21;&#x5F0F;&#xFF0C;&#x964D;&#x4F4E;CPU&#x65F6;&#x949F;&#x901F;&#x5EA6;</span>
+  systemctl stop cpuspeed
+
+  <span class="token comment">## &#x505C;&#x6B62; irqbalance &#x670D;&#x52A1;&#x5668;&#x4EE5;&#x9632;&#x6B62; OS &#x5728;&#x53EF;&#x7528;&#x7684;CPU&#x5185;&#x6838;&#x4E4B;&#x95F4;&#x91CD;&#x65B0;&#x5E73;&#x8861;&#x4E2D;&#x65AD;</span>
+  systemctl stop irqbalance
+
+  <span class="token comment">## &#x505C;&#x6B62;&#x9632;&#x706B;&#x5899;&#x8F90;&#x5C04;&#x5668;&#x4EE5;&#x6D88;&#x9664;&#x7B80;&#x4ECB;&#x6D88;&#x8017;</span>
+  systemctl stop firewalld
+
+  <span class="token comment">## &#x7981;&#x7528; interrupt moderation</span>
+  <span class="token function">ethtool</span> -C enp1s0f1 rx-usecs-irq <span class="token number">0</span> adaptive-rx off
+
+  <span class="token comment">## &#x542F;&#x52A8;&#x4F4E;&#x5EF6;&#x65F6;&#x914D;&#x7F6E;&#xFF1A;tuned-adm</span>
+  tuned-adm list
+  tuned-adm profile network-latency
+
+  <span class="token comment">## &#x9632;&#x6B62;&#x7CFB;&#x7EDF;&#x8FDB;&#x5165; CPU &#x4F4E;&#x529F;&#x8017;&#x6A21;&#x5F0F;&#x3000;cstates</span>
+</code></pre>
+</li>
+<li><p>sfnettest &#x5EF6;&#x65F6;&#x6D4B;&#x8BD5;</p>
+<ul>
+<li><p>&#x9996;&#x5148;&#xFF0C;&#x5728;&#x670D;&#x52A1;&#x5668;&#x5F00;&#x542F;</p>
+<pre class="language-"><code class="lang-bash">onload --profile<span class="token operator">=</span>latency taskset -c <span class="token number">1</span> ./sfnt-pingpong --maxms<span class="token operator">=</span><span class="token number">10000</span> --affinity <span class="token number">1,1</span>
+</code></pre>
+<p>&#x8FD0;&#x884C;&#x6210;&#x529F;&#x540E;&#x7B49;&#x5F85;&#x5BA2;&#x6237;&#x7AEF;&#x63A5;&#x5165;</p>
+<pre class="language-"><code class="lang-bash">oo:sfnt-pingpong<span class="token punctuation">[</span><span class="token number">17337</span><span class="token punctuation">]</span>: Using OpenOnload <span class="token number">201811</span> Copyright <span class="token number">2006</span>-2018 Solarflare Communications, <span class="token number">2002</span>-2005 Level <span class="token number">5</span> Networks <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+sfnt-pingpong: server: waiting <span class="token keyword">for</span> client to connect<span class="token punctuation">..</span>.
+</code></pre>
+</li>
+<li><p>TCP &#x6D4B;&#x8BD5;</p>
+<pre class="language-"><code class="lang-bash">onload --profile<span class="token operator">=</span>latency taskset -c <span class="token number">1</span> ./sfnt-pingpong --maxms<span class="token operator">=</span><span class="token number">10000</span> --affinity <span class="token number">1,1</span> tcp <span class="token number">127.0</span>.0.1
+</code></pre>
+<p>&#x8FD0;&#x884C;&#x7ED3;&#x679C;&#x5982;&#x4E0B;</p>
+<pre class="language-"><code class="lang-bash">oo:sfnt-pingpong<span class="token punctuation">[</span><span class="token number">17093</span><span class="token punctuation">]</span>: Using OpenOnload <span class="token number">201811</span> Copyright <span class="token number">2006</span>-2018 Solarflare Communications, <span class="token number">2002</span>-2005 Level <span class="token number">5</span> Networks <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span>
+<span class="token comment"># cmdline: ./sfnt-pingpong --maxms=10000 --affinity 1,1 tcp 127.0.0.1</span>
+<span class="token comment"># version: 1.5.0</span>
+<span class="token comment"># src: 8dc3b027d85b28bedf9fd731362e4968</span>
+<span class="token comment"># date: Wed Dec 11 02:19:49 EST 2019</span>
+<span class="token comment"># uname: Linux localhost.localdomain 3.10.0-1062.4.1.el7.x86_64 #1 SMP Fri Oct 18 17:15:30 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux</span>
+<span class="token comment"># cpu: model name    : Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz</span>
+<span class="token comment"># lspci: 01:00.0 Ethernet controller: Solarflare Communications SFC9120 10G Ethernet Controller (rev 01)</span>
+<span class="token comment"># lspci: 01:00.1 Ethernet controller: Solarflare Communications SFC9120 10G Ethernet Controller (rev 01)</span>
+<span class="token comment"># lspci: 05:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller (rev 15)</span>
+<span class="token comment"># enp1s0f0: driver: sfc</span>
+<span class="token comment"># enp1s0f0: version: 4.15.0.1012</span>
+<span class="token comment"># enp1s0f0: bus-info: 0000:01:00.0</span>
+<span class="token comment"># enp1s0f1: driver: sfc</span>
+<span class="token comment"># enp1s0f1: version: 4.15.0.1012</span>
+<span class="token comment"># enp1s0f1: bus-info: 0000:01:00.1</span>
+<span class="token comment"># enp5s0: driver: r8169</span>
+<span class="token comment"># enp5s0: version: </span>
+<span class="token comment"># enp5s0: bus-info: 0000:05:00.0</span>
+<span class="token comment"># virbr0: driver: bridge</span>
+<span class="token comment"># virbr0: version: 2.3</span>
+<span class="token comment"># virbr0: bus-info: N/A</span>
+<span class="token comment"># virbr0-nic: driver: tun</span>
+<span class="token comment"># virbr0-nic: version: 1.6</span>
+<span class="token comment"># virbr0-nic: bus-info: tap</span>
+<span class="token comment"># ram: MemTotal:        7872940 kB</span>
+<span class="token comment"># tsc_hz: 2999998960</span>
+<span class="token comment"># LD_PRELOAD=libonload.so</span>
+<span class="token comment"># onload_version=201811</span>
+<span class="token comment"># EF_TCP_FASTSTART_INIT=0</span>
+<span class="token comment"># EF_POLL_USEC=100000</span>
+<span class="token comment"># EF_TCP_FASTSTART_IDLE=0</span>
+<span class="token comment"># server LD_PRELOAD=libonload.so</span>
+<span class="token comment"># percentile=99</span>
+<span class="token comment">#</span>
+<span class="token comment">#    size    mean    min    median    max    %ile    stddev    iter</span>
+    <span class="token number">1</span>    <span class="token number">7668</span>    <span class="token number">6472</span>    <span class="token number">7556</span>    <span class="token number">35283</span>    <span class="token number">8855</span>    <span class="token number">522</span>    <span class="token number">650000</span>
+    <span class="token number">2</span>    <span class="token number">7064</span>    <span class="token number">6133</span>    <span class="token number">7010</span>    <span class="token number">257486</span>    <span class="token number">8064</span>    <span class="token number">469</span>    <span class="token number">705000</span>
+    <span class="token number">4</span>    <span class="token number">6964</span>    <span class="token number">6123</span>    <span class="token number">6982</span>    <span class="token number">16029</span>    <span class="token number">7967</span>    <span class="token number">369</span>    <span class="token number">716000</span>
+    <span class="token number">8</span>    <span class="token number">6915</span>    <span class="token number">6093</span>    <span class="token number">6911</span>    <span class="token number">16987</span>    <span class="token number">7923</span>    <span class="token number">401</span>    <span class="token number">721000</span>
+    <span class="token number">16</span>    <span class="token number">6904</span>    <span class="token number">6113</span>    <span class="token number">6866</span>    <span class="token number">22018</span>    <span class="token number">7916</span>    <span class="token number">403</span>    <span class="token number">722000</span>
+    <span class="token number">32</span>    <span class="token number">6888</span>    <span class="token number">6118</span>    <span class="token number">6827</span>    <span class="token number">15773</span>    <span class="token number">7875</span>    <span class="token number">384</span>    <span class="token number">723000</span>
+    <span class="token number">64</span>    <span class="token number">6880</span>    <span class="token number">6114</span>    <span class="token number">6820</span>    <span class="token number">16818</span>    <span class="token number">7862</span>    <span class="token number">390</span>    <span class="token number">724000</span>
+    <span class="token number">128</span>    <span class="token number">6895</span>    <span class="token number">6172</span>    <span class="token number">6833</span>    <span class="token number">14807</span>    <span class="token number">7890</span>    <span class="token number">397</span>    <span class="token number">723000</span>
+    <span class="token number">256</span>    <span class="token number">6909</span>    <span class="token number">6122</span>    <span class="token number">6850</span>    <span class="token number">20069</span>    <span class="token number">7911</span>    <span class="token number">391</span>    <span class="token number">721000</span>
+    <span class="token number">512</span>    <span class="token number">6861</span>    <span class="token number">6118</span>    <span class="token number">6805</span>    <span class="token number">308711</span>    <span class="token number">7840</span>    <span class="token number">527</span>    <span class="token number">726000</span>
+    <span class="token number">1024</span>    <span class="token number">6869</span>    <span class="token number">6139</span>    <span class="token number">6806</span>    <span class="token number">27147</span>    <span class="token number">7875</span>    <span class="token number">407</span>    <span class="token number">725000</span>
+    <span class="token number">2048</span>    <span class="token number">7124</span>    <span class="token number">6391</span>    <span class="token number">7064</span>    <span class="token number">19685</span>    <span class="token number">8141</span>    <span class="token number">412</span>    <span class="token number">699000</span>
+    <span class="token number">4096</span>    <span class="token number">7397</span>    <span class="token number">6523</span>    <span class="token number">7357</span>    <span class="token number">20114</span>    <span class="token number">8455</span>    <span class="token number">437</span>    <span class="token number">674000</span>
+    <span class="token number">8192</span>    <span class="token number">7675</span>    <span class="token number">6839</span>    <span class="token number">7612</span>    <span class="token number">19902</span>    <span class="token number">8757</span>    <span class="token number">432</span>    <span class="token number">649000</span>
+    <span class="token number">16384</span>    <span class="token number">8481</span>    <span class="token number">7628</span>    <span class="token number">8417</span>    <span class="token number">17966</span>    <span class="token number">9577</span>    <span class="token number">412</span>    <span class="token number">588000</span>
+    <span class="token number">32768</span>    <span class="token number">10136</span>    <span class="token number">9162</span>    <span class="token number">10063</span>    <span class="token number">19106</span>    <span class="token number">11376</span>    <span class="token number">477</span>    <span class="token number">492000</span>
+    <span class="token number">65536</span>    <span class="token number">20403</span>    <span class="token number">18129</span>    <span class="token number">20392</span>    <span class="token number">41106</span>    <span class="token number">22849</span>    <span class="token number">1070</span>    <span class="token number">245000</span>
+</code></pre>
+<p>&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;&#x6309;&#x7167;&#x53D1;&#x9001;&#x6570;&#x636E;&#x5305;&#x5927;&#x5C0F;&#x8FDB;&#x884C;&#x6392;&#x5217;&#xFF0C;&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x4E3A; RTT(round-trip-time)/2&#x7684;&#x5E73;&#x5747;&#x5EF6;&#x65F6;&#x65F6;&#x95F4;&#xFF0C;&#x5355;&#x4F4D;(ns)&#xFF0C;&#x5E76;&#x4E14;&#x5217;&#x51FA;&#x4E86;&#x6700;&#x5C0F;&#x503C;&#x3001;&#x4E2D;&#x4F4D;&#x6570;&#x3001;&#x6700;&#x5927;&#x503C;&#x3001;&#x767E;&#x5206;&#x4F4D;&#x4EE5;&#x53CA;&#x6807;&#x51C6;&#x5DEE;&#x3002;&#x6BD4;&#x5982;&#x4E00;&#x4E2A; <code>32</code> &#x5B57;&#x8282;&#x7684;&#x6570;&#x636E;&#x5305;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment">#    size    mean    min    median    max    %ile    stddev    iter</span>
+    <span class="token number">32</span>    <span class="token number">6888</span>    <span class="token number">6118</span>    <span class="token number">6827</span>    <span class="token number">15773</span>    <span class="token number">7875</span>    <span class="token number">384</span>    <span class="token number">723000</span>
+</code></pre>
+<ul>
+<li>&#x5E73;&#x5747;&#x5EF6;&#x65F6;&#x4E3A; 6.888us</li>
+<li>&#x6700;&#x5FEB;&#x5EF6;&#x65F6; 6.118us</li>
+<li>&#x6700;&#x957F;&#x5EF6;&#x65F6; 7.875us</li>
+<li>&#x6807;&#x51C6;&#x5DEE;&#x4E3A; 0.364us </li>
+</ul>
+</li>
+<li><p>UDP &#x6D4B;&#x8BD5;</p>
+<pre class="language-"><code class="lang-bash">oo:sfnt-pingpong<span class="token punctuation">[</span><span class="token number">17576</span><span class="token punctuation">]</span>: Using OpenOnload <span class="token number">201811</span> Copyright <span class="token number">2006</span>-2018 Solarflare Communications, <span class="token number">2002</span>-2005 Level <span class="token number">5</span> Networks <span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span>
+<span class="token comment"># cmdline: ./sfnt-pingpong --maxms=10000 --affinity 1,1 udp 127.0.0.1</span>
+<span class="token comment"># version: 1.5.0</span>
+<span class="token comment"># src: 8dc3b027d85b28bedf9fd731362e4968</span>
+<span class="token comment"># date: Wed Dec 11 02:27:16 EST 2019</span>
+<span class="token comment"># uname: Linux localhost.localdomain 3.10.0-1062.4.1.el7.x86_64 #1 SMP Fri Oct 18 17:15:30 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux</span>
+<span class="token comment"># cpu: model name   : Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz</span>
+<span class="token comment"># lspci: 01:00.0 Ethernet controller: Solarflare Communications SFC9120 10G Ethernet Controller (rev 01)</span>
+<span class="token comment"># lspci: 01:00.1 Ethernet controller: Solarflare Communications SFC9120 10G Ethernet Controller (rev 01)</span>
+<span class="token comment"># lspci: 05:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller (rev 15)</span>
+<span class="token comment"># enp1s0f0: driver: sfc</span>
+<span class="token comment"># enp1s0f0: version: 4.15.0.1012</span>
+<span class="token comment"># enp1s0f0: bus-info: 0000:01:00.0</span>
+<span class="token comment"># enp1s0f1: driver: sfc</span>
+<span class="token comment"># enp1s0f1: version: 4.15.0.1012</span>
+<span class="token comment"># enp1s0f1: bus-info: 0000:01:00.1</span>
+<span class="token comment"># enp5s0: driver: r8169</span>
+<span class="token comment"># enp5s0: version: </span>
+<span class="token comment"># enp5s0: bus-info: 0000:05:00.0</span>
+<span class="token comment"># virbr0: driver: bridge</span>
+<span class="token comment"># virbr0: version: 2.3</span>
+<span class="token comment"># virbr0: bus-info: N/A</span>
+<span class="token comment"># virbr0-nic: driver: tun</span>
+<span class="token comment"># virbr0-nic: version: 1.6</span>
+<span class="token comment"># virbr0-nic: bus-info: tap</span>
+<span class="token comment"># ram: MemTotal:        7872940 kB</span>
+<span class="token comment"># tsc_hz: 2999999520</span>
+<span class="token comment"># LD_PRELOAD=libonload.so</span>
+<span class="token comment"># onload_version=201811</span>
+<span class="token comment"># EF_TCP_FASTSTART_INIT=0</span>
+<span class="token comment"># EF_POLL_USEC=100000</span>
+<span class="token comment"># EF_TCP_FASTSTART_IDLE=0</span>
+<span class="token comment"># server LD_PRELOAD=libonload.so</span>
+<span class="token comment"># percentile=99</span>
+<span class="token comment">#</span>
+<span class="token comment">#   size    mean    min median  max %ile    stddev  iter</span>
+    <span class="token number">0</span>   <span class="token number">6216</span>    <span class="token number">5434</span>    <span class="token number">6120</span>    <span class="token number">27259</span>   <span class="token number">7171</span>    <span class="token number">452</span> <span class="token number">800000</span>
+    <span class="token number">1</span>   <span class="token number">5929</span>    <span class="token number">5424</span>    <span class="token number">5892</span>    <span class="token number">24829</span>   <span class="token number">6764</span>    <span class="token number">310</span> <span class="token number">839000</span>
+    <span class="token number">2</span>   <span class="token number">5841</span>    <span class="token number">5272</span>    <span class="token number">5844</span>    <span class="token number">19435</span>   <span class="token number">6659</span>    <span class="token number">289</span> <span class="token number">852000</span>
+    <span class="token number">4</span>   <span class="token number">5809</span>    <span class="token number">5261</span>    <span class="token number">5798</span>    <span class="token number">14376</span>   <span class="token number">6647</span>    <span class="token number">349</span> <span class="token number">857000</span>
+    <span class="token number">8</span>   <span class="token number">5793</span>    <span class="token number">5232</span>    <span class="token number">5776</span>    <span class="token number">15298</span>   <span class="token number">6636</span>    <span class="token number">354</span> <span class="token number">859000</span>
+    <span class="token number">16</span>  <span class="token number">5746</span>    <span class="token number">5248</span>    <span class="token number">5715</span>    <span class="token number">13638</span>   <span class="token number">6570</span>    <span class="token number">349</span> <span class="token number">866000</span>
+    <span class="token number">32</span>  <span class="token number">5762</span>    <span class="token number">5255</span>    <span class="token number">5735</span>    <span class="token number">141833</span>  <span class="token number">6587</span>    <span class="token number">382</span> <span class="token number">864000</span>
+    <span class="token number">64</span>  <span class="token number">5716</span>    <span class="token number">5246</span>    <span class="token number">5686</span>    <span class="token number">20291</span>   <span class="token number">6553</span>    <span class="token number">367</span> <span class="token number">871000</span>
+    <span class="token number">128</span> <span class="token number">5697</span>    <span class="token number">5231</span>    <span class="token number">5663</span>    <span class="token number">14968</span>   <span class="token number">6526</span>    <span class="token number">356</span> <span class="token number">874000</span>
+    <span class="token number">256</span> <span class="token number">5692</span>    <span class="token number">5212</span>    <span class="token number">5665</span>    <span class="token number">368520</span>  <span class="token number">6528</span>    <span class="token number">528</span> <span class="token number">874000</span>
+    <span class="token number">512</span> <span class="token number">5687</span>    <span class="token number">5251</span>    <span class="token number">5654</span>    <span class="token number">17424</span>   <span class="token number">6486</span>    <span class="token number">330</span> <span class="token number">875000</span>
+    <span class="token number">1024</span>    <span class="token number">5788</span>    <span class="token number">5307</span>    <span class="token number">5748</span>    <span class="token number">13709</span>   <span class="token number">6590</span>    <span class="token number">336</span> <span class="token number">860000</span>
+    <span class="token number">1472</span>    <span class="token number">5824</span>    <span class="token number">5341</span>    <span class="token number">5788</span>    <span class="token number">13610</span>   <span class="token number">6634</span>    <span class="token number">343</span> <span class="token number">854000</span>
+    <span class="token number">1473</span>    <span class="token number">5827</span>    <span class="token number">5333</span>    <span class="token number">5793</span>    <span class="token number">21815</span>   <span class="token number">6637</span>    <span class="token number">343</span> <span class="token number">854000</span>
+    <span class="token number">2048</span>    <span class="token number">5895</span>    <span class="token number">5449</span>    <span class="token number">5868</span>    <span class="token number">17404</span>   <span class="token number">6696</span>    <span class="token number">304</span> <span class="token number">844000</span>
+    <span class="token number">4096</span>    <span class="token number">6091</span>    <span class="token number">5566</span>    <span class="token number">6055</span>    <span class="token number">17905</span>   <span class="token number">6951</span>    <span class="token number">377</span> <span class="token number">817000</span>
+    <span class="token number">8192</span>    <span class="token number">6737</span>    <span class="token number">6056</span>    <span class="token number">6719</span>    <span class="token number">27552</span>   <span class="token number">7744</span>    <span class="token number">422</span> <span class="token number">739000</span>
+    <span class="token number">16384</span>   <span class="token number">7414</span>    <span class="token number">6852</span>    <span class="token number">7359</span>    <span class="token number">250894</span>  <span class="token number">8421</span>    <span class="token number">506</span> <span class="token number">672000</span>
+    <span class="token number">32768</span>   <span class="token number">8869</span>    <span class="token number">8177</span>    <span class="token number">8785</span>    <span class="token number">22277</span>   <span class="token number">10025</span>   <span class="token number">440</span> <span class="token number">562000</span>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
 <footer class="page-footer"><span class="copyright">@william</span><span class="footer-modification">&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2019-12-11 13:54:53
+2019-12-11 15:31:49
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -1111,6 +1340,10 @@ total <span class="token number">5304</span>
             
                 
                 
+                <a href="参考链接.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 参考链接">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
             
         
     </div>
@@ -1118,7 +1351,7 @@ total <span class="token number">5304</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"OpenOnload","level":"2.2.1","depth":2,"next":{"title":"MySQL 数据库","level":"2.3","depth":1,"ref":"","articles":[{"title":"修改数据存储目录","level":"2.3.1","depth":2,"path":"dba/mysql/datapath.md","ref":"dba/mysql/datapath.md","articles":[]},{"title":"建立数据库命令","level":"2.3.2","depth":2,"path":"dba/mysql/database.md","ref":"dba/mysql/database.md","articles":[]},{"title":"数据库运维操作","level":"2.3.3","depth":2,"path":"dba/mysql/operation.md","ref":"dba/mysql/operation.md","articles":[]},{"title":"数据清理要点","level":"2.3.4","depth":2,"path":"dba/数据清理要点.md","ref":"dba/数据清理要点.md","articles":[{"title":"期货Tick数据处理","level":"2.3.4.1","depth":3,"path":"dba/期货/vnpy_tick.md","ref":"dba/期货/vnpy_tick.md","articles":[]}]},{"title":"金融交易日历","level":"2.3.5","depth":2,"path":"dba/calendar.md","ref":"dba/calendar.md","articles":[]},{"title":"期货数据库","level":"2.3.6","depth":2,"path":"dba/期货/数据库.md","ref":"dba/期货/数据库.md","articles":[]},{"title":"股票数据库","level":"2.3.7","depth":2,"path":"dba/股票/数据库.md","ref":"dba/股票/数据库.md","articles":[{"title":"行情数据","level":"2.3.7.1","depth":3,"path":"dba/股票/行情数据.md","ref":"dba/股票/行情数据.md","articles":[]},{"title":"基本信息","level":"2.3.7.2","depth":3,"path":"dba/股票/基本信息.md","ref":"dba/股票/基本信息.md","articles":[]},{"title":"股票复权因子","level":"2.3.7.3","depth":3,"path":"dba/股票/复权因子.md","ref":"dba/股票/复权因子.md","articles":[]}]}]},"previous":{"title":"Solarflare 开发","level":"2.2","depth":1,"ref":"","articles":[{"title":"OpenOnload","level":"2.2.1","depth":2,"path":"os/solarflare/OpenOnload.md","ref":"os/solarflare/OpenOnload.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","advanced-emoji","alerts","url-embed","embed-pdf","copy-code-button","latex-codecogs","include-csv"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"latex-codecogs":{"type":"gif"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"include-csv":{},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"alerts":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"url-embed":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"embed-pdf":{},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"os/solarflare/OpenOnload.md","mtime":"2019-12-11T05:54:53.944Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-11T05:55:04.498Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"OpenOnload","level":"2.2.1","depth":2,"next":{"title":"参考链接","level":"2.2.2","depth":2,"path":"os/solarflare/参考链接.md","ref":"os/solarflare/参考链接.md","articles":[]},"previous":{"title":"Solarflare 开发","level":"2.2","depth":1,"ref":"","articles":[{"title":"OpenOnload","level":"2.2.1","depth":2,"path":"os/solarflare/OpenOnload.md","ref":"os/solarflare/OpenOnload.md","articles":[]},{"title":"参考链接","level":"2.2.2","depth":2,"path":"os/solarflare/参考链接.md","ref":"os/solarflare/参考链接.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["chapter-fold","expandable-chapters-small","expandable-chapters","advanced-emoji","github","splitter","-sharing","sharing-plus","simple-page-toc","page-toc-button","klipse","popup","tbfed-pagefooter","todo","prism","-highlight","advanced-emoji","alerts","url-embed","embed-pdf","copy-code-button","latex-codecogs","include-csv"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"latex-codecogs":{"type":"gif"},"chapter-fold":{},"prism":{"css":["prismjs/themes/prism-dracula.css"]},"include-csv":{},"github":{"url":"https://github.com/williamlfang"},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"todo":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":3,"minTocSize":3},"alerts":{},"expandable-chapters-small":{},"copy-code-button":{},"klipse":{"myConfigKey":"it's the default value"},"url-embed":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"google":true,"twitter":true,"weibo":true,"all":["google","twitter","weibo"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"embed-pdf":{},"expandable-chapters":{}},"theme":"default","author":"方莲","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"isbn":"","variables":{},"title":"HiBook","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"William's Blog":"https://williamlfang.github.io/"}},"gitbook":"*","description":"汉云投资技术手册","extension":null},"file":{"path":"os/solarflare/OpenOnload.md","mtime":"2019-12-11T07:31:49.792Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-11T07:32:11.729Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

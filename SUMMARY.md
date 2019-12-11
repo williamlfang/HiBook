@@ -18,6 +18,7 @@
     * [安装工具套件:tmux-zsh-autojump](os/tmux-zsh-autojump.md)
 * Solarflare 开发
     * [OpenOnload](os/solarflare/OpenOnload.md)
+    * [参考链接](os/solarflare/参考链接.md)
 * MySQL 数据库
     * [修改数据存储目录](dba/mysql/datapath.md)
     * [建立数据库命令](dba/mysql/database.md)
