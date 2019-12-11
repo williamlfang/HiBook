@@ -150,6 +150,8 @@ drwxr-xr-x. 2 fl fl  108 Dec  3  2018 sh
 ./onload_build
 ## 执行安装
 ./onload_install
+#加载 onload
+onload_tool reload
 ```
 
 ## demo
