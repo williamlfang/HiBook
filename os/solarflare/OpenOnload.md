@@ -226,6 +226,32 @@ rpm -e *sfc*.rpm
 onload_uninstall
 ```
 
+## 使用
+
+OpenOnload有两种模式。
+
+- Spinning模式（busy-wait）中，加速进程的每个线程会占用一整个CPU core，始终处于waiting状态。通过htop可以看到该CPU的使用率为100%。spinning模式速度更快，但是要注意CPU core的数量。
+- Interrupt模式中，线程不会占用满一个CPU core，但可以将中断Interrupt放在一个CPU core。interrupt模式也有加速效果，理论上比spinning略差一些。当服务器上总线程数大于CPU core的数量时，interrupt可能优于spinning，需要测试来论证。
+
+### 使用 spinning 模式加速应用
+
+查看CPU core序号（注意，一般服务器是从0开始排序，也有不正常的版本，请查证。否则OpenOnload选择的CPU core可能不存在）
+
+```bash
+egrep "(id|processo).*:|^ *$" /proc/cpuinfo
+```
+
+```bash
+onload -p latency taskset -c 3 ./[Application]
+onload --profile=latency taskset -c 2 ./[Application]
+```
+其中，`-c` 参数选择 CPU core 的号码，也可以选择多个core：`-c 2,3`。选择core的数量与进程的线程数有关。
+
+### 使用 internal 模式加速应用
+
+```bash
+onload ./[Application]
+```
 
 
 ## demo
@@ -377,6 +403,12 @@ total 5304
 
 - sfnettest 延时测试
 
+  - 参数说明
+    - `--profile=latency`：测试延时模式
+    - `taskset -c 1`：绑定 cpu core 的号码 1
+    - `--maxms=10000` 指发送的最大数据包大小
+    - `--affinity "1;1"` 指使用 `core 1` 发送，使用 `core 1` 接收（可以选不同的core）
+    
   - 首先，在服务器开启
 
     ```bash
