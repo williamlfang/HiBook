@@ -1,6 +1,62 @@
 # 初探
 
-厂商的MAC地址前四位是00:0F，以此判断哪个网卡为Solarflare的网卡。
+## 固件信息
+
+可以通过命令查看当前的网卡连接情况
+
+```bash
+ip address
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp5s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 4c:ed:fb:c2:25:67 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.115/24 brd 192.168.1.255 scope global noprefixroute dynamic enp5s0
+       valid_lft 1496sec preferred_lft 1496sec
+    inet6 fe80::6804:b02d:fb9f:19b0/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: enp1s0f0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN group default qlen 1000
+    link/ether 00:0f:53:5d:d3:90 brd ff:ff:ff:ff:ff:ff
+4: enp1s0f1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 00:0f:53:5d:d3:91 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.112/24 brd 192.168.1.255 scope global noprefixroute dynamic enp1s0f1
+       valid_lft 1544sec preferred_lft 1544sec
+    inet6 fe80::20f:53ff:fe5d:d391/64 scope link 
+       valid_lft forever preferred_lft forever
+5: virbr0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+    link/ether 52:54:00:c5:0a:77 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
+       valid_lft forever preferred_lft forever
+6: virbr0-nic: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000
+    link/ether 52:54:00:c5:0a:77 brd ff:ff:ff:ff:ff:ff
+```
+
+厂商的MAC地址前四位是00:0F，以此判断哪个网卡为Solarflare的网卡。因此，我们可以看出以下两个网卡为 Solarflare
+
+- `enp1s0f0`
+- `enp1s0f1`
+
+我们还可以通过命令查看具体的网卡信息
+
+```bash
+## 需要先安装 openonload
+ethtool -i enp1s0f1
+
+driver: sfc
+version: 4.15.0.1012
+firmware-version: 4.7.1.1001 rx1 tx1
+expansion-rom-version: 
+bus-info: 0000:01:00.1
+supports-statistics: yes
+supports-test: yes
+supports-eeprom-access: no
+supports-register-dump: yes
+supports-priv-flags: yes
+```
 
 ##下载驱动
 
