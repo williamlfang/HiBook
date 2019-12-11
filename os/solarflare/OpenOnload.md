@@ -410,6 +410,14 @@ total 5304
 
   - UDP 测试
 
+    执行命令
+
+    ```bash
+    onload --profile=latency taskset -c 1 ./sfnt-pingpong --maxms=10000 --affinity 1,1 udp 127.0.0.1
+    ```
+
+    得到结果：**果然 UDP 大法好**。
+
     ```bash
     oo:sfnt-pingpong[17576]: Using OpenOnload 201811 Copyright 2006-2018 Solarflare Communications, 2002-2005 Level 5 Networks [6]
     # cmdline: ./sfnt-pingpong --maxms=10000 --affinity 1,1 udp 127.0.0.1
