@@ -264,6 +264,7 @@ onload ./[Application]
 我们进入 `gnu_x86_64` 的文件夹即可。
 
 ```bash
+cd scripts/
 ## 增加环境路径
 export PATH="$PWD:$PATH"
 ## 使用 64 位进行编译
