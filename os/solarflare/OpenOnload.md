@@ -243,7 +243,7 @@ modprobe –r sfc
 rpm -qa | grep sfc
 rpm -e *sfc*.rpm
 #unintall onload
-onload_uninstall
+./onload_misc/onload_uninstall
 ```
 
 ## 使用
