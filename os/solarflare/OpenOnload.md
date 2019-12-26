@@ -210,6 +210,26 @@ drwxr-xr-x. 2 fl fl  108 Dec  3  2018 sh
 ./onload_install
 #加载 onload
 onload_tool reload
+
+## 开启 rx1 tx1 模式
+## Ref： https://support.solarflare.com/docs/SF-103837-CD
+## Adapters Software Support
+sfboot --adapter=enp1s0f1 firmware-variant=ultra-low-latency
+## 需要重启
+sudo reboot now
+
+ethtool -i enp1s0f1
+driver: sfc
+version: 4.15.0.1012
+firmware-version: 6.2.7.1001 rx1 tx1
+expansion-rom-version:
+bus-info: 0000:01:00.1
+supports-statistics: yes
+supports-test: yes
+supports-eeprom-access: no
+supports-register-dump: yes
+supports-priv-flags: yes
+
 ```
 
 ## 卸载
