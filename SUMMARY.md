@@ -9,6 +9,7 @@
     * [升级 gcc](os/centos/gcc.md)
     * [源代码编译升级 gcc](os/centos/gcc-source.md)
     * [源代码升级gdb 8.1](os/centos/gdb.md)
+    * [源代码编译升级 vim8.2](os/centos/vim.md)
     * [命令行设置分辨率](os/centos/CentOS7命令行设置分辨率.md)
     * [命令行启动 TeamViewer](os/命令行启动 TeamViewer.md)
     * [源代码安装 cmake](os/centos/cmake.md)
